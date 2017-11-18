@@ -1,0 +1,43 @@
+{
+    "manifest_version": 2,
+    "name": "GodJJ Now",
+    "description": "是一款真正的JJ套件",
+    "version": "1.5.1",
+    "permissions": [
+        "alarms",
+        "storage",
+        "notifications",
+        "https://www.op.gg/",
+        "http://www.op.gg/",
+        "https://lol.moa.tw/"
+    ],
+    "options_ui":
+    {
+        "page": "options.html"
+    },
+    "background":
+    {
+        "page": "background.html"
+    },
+    "browser_action":
+    {
+        "default_area": "navbar",
+        "default_title": "點我查詢GodJJ",
+        "default_icon": "icon.png",
+        "default_popup": "popup.html"
+    },
+    "icons":
+    {
+        "16": "icon16.png",
+        "48": "icon48.png",
+        "128": "icon128.png"
+    },
+    "applications":
+    {
+        "gecko":
+        {
+            "id": "kakapon.tw@gmail.com",
+            "strict_min_version": "42.0"
+        }
+    }
+}

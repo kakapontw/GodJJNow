@@ -1,6 +1,15 @@
-# GodJJNow
+<p align="center">
+<img src="https://github.com/kakapontw/GodJJNow/blob/master/godjjchrome/img/browser.png" width="128" style="margin:auto;">
+</p>
+
+# GodJJNow 
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/v/blinlknnpdpmchjdimpiiinbamgbnbmd.svg)](https://chrome.google.com/webstore/detail/godjj-now/blinlknnpdpmchjdimpiiinbamgbnbmd?hl=zh-TW) [![Chrome Web Store](https://img.shields.io/chrome-web-store/users/blinlknnpdpmchjdimpiiinbamgbnbmd.svg)]() [![Chrome Web Store](https://img.shields.io/chrome-web-store/stars/blinlknnpdpmchjdimpiiinbamgbnbmd.svg)]() [![Mozilla Add-on](https://img.shields.io/amo/v/godjj-now.svg)](https://addons.mozilla.org/en-US/firefox/addon/godjj-now/)
 
 方便大家及時了解GodJJ各項資訊
+
+### 線上版本：
+- [Chrome版本](https://chrome.google.com/webstore/detail/godjj-now/blinlknnpdpmchjdimpiiinbamgbnbmd)
+- [Firefox版本](https://addons.mozilla.org/en-US/firefox/addon/godjj-now/)
 
 ### 目前包含：
 - Facebook、Youtube、歌單等等相關資訊連結

@@ -17,7 +17,8 @@ chrome.storage.sync.get({
     if (items.getOpen) {
         chrome.alarms.create('openAlarm', alarmInfo);
         notificationPoint = 1;
-        chrome.browserAction.setBadgeText({ text: "" });
+        // chrome.browserAction.setBadgeText({ text: "" });
+        chrome.browserAction.setIcon({path: "/img/sleep.png"});
         chrome.storage.local.set({ "OpenNotification": false }, function() {});
         setTimeout(function() { checkOpen(); }, 2000);
     }
@@ -31,7 +32,8 @@ chrome.storage.onChanged.addListener(function(changes, areaName) {
             chrome.storage.local.set({ "OpenNotification": false }, function() {});
             checkOpen();
         } else {
-            chrome.browserAction.setBadgeText({ text: "" });
+            // chrome.browserAction.setBadgeText({ text: "" });
+            chrome.browserAction.setIcon({path: "/img/sleep.png"});
             chrome.alarms.clearAll();
         }
     } else if (changes.OpenNotification) {
@@ -48,13 +50,15 @@ function checkOpen() {
         if (xhr.readyState == 4) {
             var obj = JSON.parse(xhr.responseText);
             if (obj.stream != null) {
-                chrome.browserAction.setBadgeText({ text: "8" });
-                chrome.browserAction.setBadgeBackgroundColor({ color: "#CC0000" });
+                // chrome.browserAction.setBadgeText({ text: "8" });
+                // chrome.browserAction.setBadgeBackgroundColor({ color: "#CC0000" });
+                chrome.browserAction.setIcon({path: "/img/8.png"});
                 notificationTitle = obj.stream.channel.status;
                 notificationMessage = "JJ開台囉 點這前往實況台";
                 chrome.storage.local.set({ "OpenNotification": true }, function() {});
             } else {
-                chrome.browserAction.setBadgeText({ text: "" });
+                // chrome.browserAction.setBadgeText({ text: "" });
+                chrome.browserAction.setIcon({path: "/img/sleep.png"});
                 chrome.storage.local.set({ "OpenNotification": false }, function() {});
             }
         }
@@ -103,7 +107,7 @@ function audio() {
     var audio = document.createElement("audio");
     audio.setAttribute("controls", "controls");
     audio.setAttribute("autoplay", "autoplay");
-    audio.setAttribute("src", "/audio/88BOU.mp3");
+    audio.setAttribute("src", "/audio/88BOU_niniz.mp3");
     audio.setAttribute("type", "audio/mpeg");
     audio.volume = 1;
     document.body.appendChild(audio);

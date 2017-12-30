@@ -1,5 +1,8 @@
-﻿document.getElementById('updatebutton').addEventListener('click', function(ce) {
+﻿document.getElementById('updateButton').addEventListener('click', function(ce) {
     chrome.tabs.create({ "url": "updates.html" });
+});
+document.getElementById('githubButton').addEventListener('click', function(ce) {
+    chrome.tabs.create({ "url": "https://github.com/kakapontw/GodJJNow" });
 });
 
 //將設置用chrome.storage.sync儲存

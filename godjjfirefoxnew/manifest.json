@@ -2,7 +2,7 @@
     "manifest_version": 2,
     "name": "GodJJ Now",
     "description": "是一款真正的JJ套件",
-    "version": "1.5.1",
+    "version": "1.5.2",
     "permissions": [
         "alarms",
         "storage",
@@ -23,7 +23,7 @@
     {
         "default_area": "navbar",
         "default_title": "點我查詢GodJJ",
-        "default_icon": "icon.png",
+        "default_icon": "/img/sleep.png",
         "default_popup": "popup.html"
     },
     "icons":

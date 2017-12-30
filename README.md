@@ -1,7 +1,3 @@
-<p align="center">
-<img src="https://github.com/kakapontw/GodJJNow/blob/master/godjjchrome/img/browser.png" width="128" style="margin:auto;">
-</p>
-
 # GodJJNow 
 [![Chrome Web Store](https://img.shields.io/chrome-web-store/v/blinlknnpdpmchjdimpiiinbamgbnbmd.svg)](https://chrome.google.com/webstore/detail/godjj-now/blinlknnpdpmchjdimpiiinbamgbnbmd?hl=zh-TW) [![Chrome Web Store](https://img.shields.io/chrome-web-store/users/blinlknnpdpmchjdimpiiinbamgbnbmd.svg)]() [![Chrome Web Store](https://img.shields.io/chrome-web-store/stars/blinlknnpdpmchjdimpiiinbamgbnbmd.svg)]() [![Mozilla Add-on](https://img.shields.io/amo/v/godjj-now.svg)](https://addons.mozilla.org/en-US/firefox/addon/godjj-now/)
 
@@ -14,7 +10,7 @@
 ### 目前包含：
 - Facebook、Youtube、歌單等等相關資訊連結
 - LoL戰績摘要
-- 圖奇開台通知(含JJ巴巴包鈴聲)
+- 圖奇開台通知(含叭叭包鈴聲)
 - JJ聊天室資訊
 
 ### 使用者隱私聲明：
@@ -28,6 +24,7 @@
 * [Chart.js](http://www.chartjs.org/)
 * [Bootstrap](https://getbootstrap.com/)
 * [Moment.js](https://momentjs.com/)
+* [tmi.js](https://www.tmijs.org/)
 
 * JJ台相關圖片已取得使用許可
 * App icon made by Alfredo Hernandez from www.flaticon.com, licensed under CC BY 3.0
@@ -35,6 +32,10 @@
 * Notification icon made by Darius Dan from www.flaticon.com, licensed under CC BY 3.0
 
 ### 更新資訊：
+<h4>1.5.2</h4>
+<p><strong>慶祝每日使用人數突破1000人(九個月的時間 3/24~12/29)</strong></p>
+<p><strong>並迎接2018的到來</strong></p>
+<p><strong>更新開台通知音效及工作列圖示</strong></p>
 <h4>1.5.1</h4>
 <p><strong>增加台服資訊</strong></p>
 <p><strong>修復一些小蟲</strong></p>

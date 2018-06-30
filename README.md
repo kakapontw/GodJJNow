@@ -32,6 +32,9 @@
 * Notification icon made by Darius Dan from www.flaticon.com, licensed under CC BY 3.0
 
 ### 更新資訊：
+<h4>1.5.3</h4>
+<p><strong>半年首次更新，時間過好快呀</strong></p>
+<p><strong>同步JJ橫幅圖，換回JJ版本巴巴包音效，移除部分按鈕</strong></p>
 <h4>1.5.2</h4>
 <p><strong>慶祝每日使用人數突破1000人(九個月的時間 3/24~12/29)</strong></p>
 <p><strong>並迎接2018的到來</strong></p>

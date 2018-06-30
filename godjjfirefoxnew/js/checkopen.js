@@ -115,7 +115,7 @@ function audio() {
     var audio = document.createElement("audio");
     audio.setAttribute("controls", "controls");
     audio.setAttribute("autoplay", "autoplay");
-    audio.setAttribute("src", "/audio/88BOU_niniz.wav");
+    audio.setAttribute("src", "/audio/88BOU.wav");
     audio.setAttribute("type", "audio/wav");
     audio.volume = 1;
     document.body.appendChild(audio);

@@ -107,7 +107,7 @@ function audio() {
     var audio = document.createElement("audio");
     audio.setAttribute("controls", "controls");
     audio.setAttribute("autoplay", "autoplay");
-    audio.setAttribute("src", "/audio/88BOU_niniz.mp3");
+    audio.setAttribute("src", "/audio/88BOU.mp3");
     audio.setAttribute("type", "audio/mpeg");
     audio.volume = 1;
     document.body.appendChild(audio);

@@ -1,8 +1,10 @@
 ﻿document.addEventListener('DOMContentLoaded', function(dcle) {
-    var buttonName = ["FBbutton", "Youtubebutton", "LoLTWbutton", "LoLbutton", "SFbutton", "Musicbutton", "Music2button", "MEJJbutton", "Twitchbutton"];
-    var buttonUrl = ["https://www.facebook.com/GodJJLOL", "https://www.youtube.com/channel/UCt--8DKolHNzogSofX35fRQ", "https://lol.moa.tw/summoner/show/alimamado", "https://www.op.gg/summoner/userName=xcocox",
-        "https://v-league.pro/player/godjj1235566/profile", "https://www.youtube.com/playlist?list=PLicQ4e8xsEiH3AnRUFkkwJVaHHvLi-ylL",
-        "https://www.youtube.com/playlist?list=PLBGxXkqJe9DSoclWSk6idRDyTYtmWxlcw", "http://www.ment.com.tw/zh-tw/artist_info.php?id=14", "https://www.twitch.tv/godjj"
+    var buttonName = ["FBbutton", "Youtubebutton", "LoLTWbutton", "LoLbutton", "Musicbutton", "Music2button", "MEJJbutton", "Twitchbutton"];
+    var buttonUrl = ["https://www.facebook.com/GodJJLOL", "https://www.youtube.com/channel/UCt--8DKolHNzogSofX35fRQ", 
+        "https://lol.moa.tw/summoner/show/alimamado", "https://www.op.gg/summoner/userName=xcocox",
+        "https://www.youtube.com/playlist?list=PLicQ4e8xsEiH3AnRUFkkwJVaHHvLi-ylL",
+        "https://www.youtube.com/playlist?list=PLBGxXkqJe9DSoclWSk6idRDyTYtmWxlcw", 
+        "http://www.ment.com.tw/zh-tw/artist_info.php?id=14", "https://www.twitch.tv/godjj"
     ];
     for (var i = 0; i < buttonName.length; i++) {
         var button = document.getElementById(buttonName[i]);
@@ -80,8 +82,8 @@ lolinfo.onreadystatechange = function() {
             document.getElementById("LoL_LeaguePoints").innerText = tierRank[2].replace("LP", "") + bostr;
         }
         var WinRatio = tempArr[2].split(" ");
-        document.getElementById("LoL_Win").innerText = WinRatio[1].substring(0, WinRatio[1].length - 1);
-        document.getElementById("LoL_Loss").innerText = WinRatio[2].substring(0, WinRatio[2].length - 1);
+        document.getElementById("LoL_Win").innerText = WinRatio[1].match(/\d+/);
+        document.getElementById("LoL_Loss").innerText = WinRatio[2].match(/\d+/);
         document.getElementById("LoL_WinRatio").innerText = WinRatio[WinRatio.length - 2];
     }
 }

@@ -112,14 +112,22 @@ function openNotification(title, message) {
 }
 
 function audio() {
-    var audio = document.createElement("audio");
-    audio.setAttribute("controls", "controls");
-    audio.setAttribute("autoplay", "autoplay");
-    audio.setAttribute("src", "/audio/88BOU.wav");
-    audio.setAttribute("type", "audio/wav");
-    audio.volume = 1;
-    document.body.appendChild(audio);
-    audio.addEventListener('ended', function() {
-        this.remove();
-    }, false);
+    browser.storage.local.get({
+        getSoundVersion: false
+    }, function(items) {
+        var soundVersion = "/audio/88BOU.wav"
+        if (items.getSoundVersion) {
+            soundVersion = "/audio/88BOU_niniz.wav"
+        }
+        var audio = document.createElement("audio");
+        audio.setAttribute("controls", "controls");
+        audio.setAttribute("autoplay", "autoplay");
+        audio.setAttribute("src", soundVersion);
+        audio.setAttribute("type", "audio/wav");
+        audio.volume = 1;
+        document.body.appendChild(audio);
+        audio.addEventListener('ended', function() {
+            this.remove();
+        }, false);
+    });
 }

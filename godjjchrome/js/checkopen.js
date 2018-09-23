@@ -104,14 +104,22 @@ function openNotification(title, message) {
 }
 
 function audio() {
-    var audio = document.createElement("audio");
-    audio.setAttribute("controls", "controls");
-    audio.setAttribute("autoplay", "autoplay");
-    audio.setAttribute("src", "/audio/88BOU.mp3");
-    audio.setAttribute("type", "audio/mpeg");
-    audio.volume = 1;
-    document.body.appendChild(audio);
-    audio.addEventListener('ended', function() {
-        this.remove();
-    }, false);
+    chrome.storage.sync.get({
+        getSoundVersion: false
+    }, function(items) {
+        var soundVersion = "/audio/88BOU.mp3"
+        if (items.getSoundVersion) {
+            soundVersion = "/audio/88BOU_niniz.mp3"
+        }
+        var audio = document.createElement("audio");
+        audio.setAttribute("controls", "controls");
+        audio.setAttribute("autoplay", "autoplay");
+        audio.setAttribute("src", soundVersion);
+        audio.setAttribute("type", "audio/mpeg");
+        audio.volume = 1;
+        document.body.appendChild(audio);
+        audio.addEventListener('ended', function() {
+            this.remove();
+        }, false);
+    });
 }

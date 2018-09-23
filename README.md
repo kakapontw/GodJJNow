@@ -32,6 +32,11 @@
 * Notification icon made by Darius Dan from www.flaticon.com, licensed under CC BY 3.0
 
 ### 更新資訊：
+<h4>1.5.4</h4>
+<p><strong>連假終於有空更新</strong></p>
+<p><strong>新增開台音效選項，可選擇要原版音效還是特別版音效</strong></p>
+<p><strong>修正部分Bug以及更換LOL台服資料來源</strong></p>
+<p><strong>(For Chrome)Chrome更新版本後，通知呈現的問題還在觀察中</strong></p>
 <h4>1.5.3</h4>
 <p><strong>半年首次更新，時間過好快呀</strong></p>
 <p><strong>同步JJ橫幅圖，換回JJ版本巴巴包音效，移除部分按鈕</strong></p>

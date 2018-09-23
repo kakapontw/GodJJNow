@@ -10,10 +10,12 @@ function save_options() {
     var getChat = document.getElementById('getChat').checked;
     var getOpen = document.getElementById('getOpen').checked;
     var getSound = document.getElementById('getSound').checked;
+    var getSoundVersion = document.getElementById('getSoundVersion').checked;
     browser.storage.local.set({
         getChat: getChat,
         getOpen: getOpen,
-        getSound: getSound
+        getSound: getSound,
+        getSoundVersion: getSoundVersion
     }, function() {
         //提供儲存成功的提示
         var status = document.getElementById('status');
@@ -30,11 +32,13 @@ function restore_options() {
     browser.storage.local.get({
         getChat: true,
         getOpen: true,
-        getSound: true
+        getSound: true,
+        getSoundVersion: false
     }, function(items) {
         document.getElementById('getChat').checked = items.getChat;
         document.getElementById('getOpen').checked = items.getOpen;
         document.getElementById('getSound').checked = items.getSound;
+        document.getElementById('getSoundVersion').checked = items.getSoundVersion;
     });
 }
 document.addEventListener('DOMContentLoaded', restore_options);

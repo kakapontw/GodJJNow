@@ -2,14 +2,15 @@
     "manifest_version": 2,
     "name": "GodJJ Now",
     "description": "是一款真正的JJ套件",
-    "version": "1.5.3",
+    "version": "1.5.4",
     "permissions": [
         "alarms",
         "storage",
         "notifications",
         "https://www.op.gg/",
         "http://www.op.gg/",
-        "https://lol.moa.tw/"
+        "https://tw.op.gg/",
+        "http://tw.op.gg/"
     ],
     "options_ui":
     {

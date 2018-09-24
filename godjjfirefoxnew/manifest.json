@@ -2,7 +2,7 @@
     "manifest_version": 2,
     "name": "GodJJ Now",
     "description": "是一款真正的JJ套件",
-    "version": "1.5.4",
+    "version": "1.5.5",
     "permissions": [
         "alarms",
         "storage",

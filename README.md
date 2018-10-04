@@ -32,8 +32,11 @@
 * Notification icon made by Darius Dan from www.flaticon.com, licensed under CC BY 3.0
 
 ### 更新資訊：
+<h4>1.5.6</h4>
+<p><strong>修正聊天室與通知異常</strong></p>
+<p><strong>另外宣傳一下特別版音效是要在右鍵，設定的選項中開啟</strong></p>
 <h4>1.5.5</h4>
-<p><strong>(Fix 1.5.4)抓取聊天室功能目前故障，先暫停功能</strong></p>
+<p><strong>抓取聊天室功能目前故障，先暫停功能</strong></p>
 <h4>1.5.4</h4>
 <p><strong>連假終於有空更新</strong></p>
 <p><strong>新增開台音效選項，可選擇要原版音效還是特別版音效</strong></p>

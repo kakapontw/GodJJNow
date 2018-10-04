@@ -69,6 +69,7 @@ function checkOpen() {
 
 //chrome通知
 var notificationId = "checkopenid";
+var notificationNum = 0;
 var notificationTitle = "JJ開台囉";
 var notificationMessage = "點這前往實況台";
 var NOTIFICATION_TEMPLATE_TYPE = {
@@ -85,6 +86,7 @@ chrome.notifications.onClicked.addListener(function(id) {
 });
 
 function openNotification(title, message) {
+    notificationId = notificationId + notificationNum;
     var notificationOptions = {
         type: NOTIFICATION_TEMPLATE_TYPE.BASIC,
         iconUrl: "./img/twitchNotification.png",

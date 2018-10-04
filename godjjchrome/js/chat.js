@@ -55,6 +55,7 @@ chrome.storage.onChanged.addListener(function(changes, areaName) {
 
 //chrome通知
 var notificationId = "chatid";
+var notificationNum = 0;
 var NOTIFICATION_TEMPLATE_TYPE = {
     BASIC: "basic",
     IMAGE: "image",
@@ -67,6 +68,7 @@ var myButton1 = {
 };
 
 function chromeNotification(name, message) {
+    notificationId = notificationId + notificationNum;
     var oneMinuteAsMilliseconds = 1 * 60 * 1000;
     var currentTimeAsMilliseconds = new Date().getTime();
     var notificationOptions = {

@@ -32,6 +32,8 @@
 * Notification icon made by Darius Dan from www.flaticon.com, licensed under CC BY 3.0
 
 ### 更新資訊：
+<h4>1.5.7</h4>
+<p><strong>更換LOL台服資料來源，暫停韓服資訊</strong></p>
 <h4>1.5.6</h4>
 <p><strong>修正聊天室與通知異常</strong></p>
 <p><strong>另外宣傳一下特別版音效是要在右鍵，設定的選項中開啟</strong></p>

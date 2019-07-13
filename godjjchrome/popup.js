@@ -1,7 +1,7 @@
 ﻿document.addEventListener('DOMContentLoaded', function(dcle) {
     var buttonName = ["FBbutton", "Youtubebutton", "LoLTWbutton", "LoLbutton", "Musicbutton", "Music2button", "MEJJbutton", "Twitchbutton"];
     var buttonUrl = ["https://www.facebook.com/GodJJLOL", "https://www.youtube.com/channel/UCt--8DKolHNzogSofX35fRQ", 
-        "https://lol.moa.tw/summoner/show/alimamado", "https://www.op.gg/summoner/userName=xcocox",
+        "https://lol.moa.tw/summoner/show/alimamado", "https://www.op.gg/summoner/userName=SearchHOUO",
         "https://www.youtube.com/playlist?list=PLicQ4e8xsEiH3AnRUFkkwJVaHHvLi-ylL",
         "https://www.youtube.com/playlist?list=PLBGxXkqJe9DSoclWSk6idRDyTYtmWxlcw", 
         "http://www.ment.com.tw/zh-tw/artist_info.php?id=14", "https://www.twitch.tv/godjj"
@@ -52,7 +52,7 @@ chrome.storage.sync.get({
 });
 
 var lolinfo = new XMLHttpRequest();
-lolinfo.open("GET", "https://www.op.gg/summoner/userName=xcocox", true);
+lolinfo.open("GET", "https://www.op.gg/summoner/userName=SearchHOUO", true);
 lolinfo.onreadystatechange = function() {
     if (lolinfo.readyState == 4) {
         var tempStr = lolinfo.responseText;
@@ -87,7 +87,7 @@ lolinfo.onreadystatechange = function() {
         document.getElementById("LoL_WinRatio").innerText = WinRatio[WinRatio.length - 2];
     }
 }
-//lolinfo.send();
+lolinfo.send();
 
 var lolinfoTW = new XMLHttpRequest();
 lolinfoTW.open("GET", "https://lol.moa.tw/Ajax/rankeddashboard/7513983/SOLO5V5", true);
@@ -261,7 +261,7 @@ function clearString(s) {
 }
 
 var lastteninfo = new XMLHttpRequest();
-lastteninfo.open("GET", "https://www.op.gg/summoner/matches/ajax/averageAndList/startInfo=0&summonerId=10412193&type=total", true);
+lastteninfo.open("GET", "https://www.op.gg/summoner/matches/ajax/averageAndList/startInfo=0&summonerId=72520577&type=total", true);
 lastteninfo.onreadystatechange = function() {
     if (lastteninfo.readyState == 4) {
         var obj = JSON.parse(lastteninfo.responseText);
@@ -294,7 +294,7 @@ lastteninfo.onreadystatechange = function() {
         draw("myChart", date.reverse(), winOrlose.reverse(), kda.reverse());
     }
 }
-//lastteninfo.send();
+lastteninfo.send();
 
 var lastteninfoTW = new XMLHttpRequest();
 lastteninfoTW.open("GET", "https://lol.moa.tw/Ajax/recentgames/104480608", true);

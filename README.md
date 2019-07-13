@@ -32,6 +32,8 @@
 * Notification icon made by Darius Dan from www.flaticon.com, licensed under CC BY 3.0
 
 ### 更新資訊：
+<h4>1.5.8</h4>
+<p><strong>傳說再起，韓服戰績重出江湖</strong></p>
 <h4>1.5.7</h4>
 <p><strong>更換LOL台服資料來源，暫停韓服資訊</strong></p>
 <h4>1.5.6</h4>
@@ -58,18 +60,14 @@
 <p><strong>Firefox版本即將正式上線囉(審核中，目前查詢到的為Beta版)</strong></p>
 <p><strong>另外已修復JJ開台時關掉瀏覽器，關台時打開還會有開台通知的錯誤</strong></p>
 <hr>
-<h4>1.4.4</h4>
+<h4>1.4.0 - 1.4.4</h4>
 <p><strong>傳說再起，韓服戰績重出江湖</strong></p>
 <p><strong>另外JJ時鐘及緬懷TPS King專區先行下架擇日再戰</strong></p>
-<h4>1.4.3</h4>
 <p><strong>修正程式細部問題</strong></p>
-<h4>1.4.2</h4>
 <p><strong>由於J子韓服帳號消失，設立及免</strong></p>
 <p><strong>也因上述原因，目前LoL資訊暫時使用台服資料</strong></p>
 <p><strong>另外調整部分介面</strong></p>
-<h4>1.4.1</h4>
 <p><strong>修正程式細部問題</strong></p>
-<h4>1.4.0</h4>
 <p><strong>由於J子最近較少玩快打，加上資料來源遇到技術問題暫時無法更新</strong></p>
 <p><strong>Profile頁面快打部分更改成J子Twitch資訊</strong></p>
 <hr>

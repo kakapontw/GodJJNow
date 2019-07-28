@@ -157,7 +157,7 @@ function getYMdiff(now, dateString) {
 }
 
 var twitchinfo = new XMLHttpRequest();
-twitchinfo.open("GET", "https://api.twitch.tv/kraken/channels/godjj", true);
+twitchinfo.open("GET", "https://api.twitch.tv/kraken/channels/11561802", true);
 twitchinfo.onreadystatechange = function() {
     if (twitchinfo.readyState == 4) {
         var obj = JSON.parse(twitchinfo.responseText);
@@ -170,11 +170,12 @@ twitchinfo.onreadystatechange = function() {
 
     }
 }
+twitchinfo.setRequestHeader("Accept", "application/vnd.twitchtv.v5+json");
 twitchinfo.setRequestHeader("Client-ID", "630so911da4xpdikvv92t5nrke4h96");
 twitchinfo.send();
 
 var teamsinfo = new XMLHttpRequest();
-teamsinfo.open("GET", "https://api.twitch.tv/kraken/channels/godjj/teams", true);
+teamsinfo.open("GET", "https://api.twitch.tv/kraken/channels/11561802/teams", true);
 teamsinfo.onreadystatechange = function() {
     if (teamsinfo.readyState == 4) {
         var obj = JSON.parse(teamsinfo.responseText);
@@ -187,11 +188,12 @@ teamsinfo.onreadystatechange = function() {
         // document.getElementById("Twitch_Teams").appendChild(link);
     }
 }
+teamsinfo.setRequestHeader("Accept", "application/vnd.twitchtv.v5+json");
 teamsinfo.setRequestHeader("Client-ID", "630so911da4xpdikvv92t5nrke4h96");
 teamsinfo.send();
 
 var videoinfo = new XMLHttpRequest();
-videoinfo.open("GET", "https://api.twitch.tv/kraken/channels/godjj/videos?broadcast_type=archive", true);
+videoinfo.open("GET", "https://api.twitch.tv/kraken/channels/11561802/videos?broadcast_type=archive", true);
 videoinfo.onreadystatechange = function() {
     if (videoinfo.readyState == 4) {
         var obj = JSON.parse(videoinfo.responseText);
@@ -210,13 +212,14 @@ videoinfo.onreadystatechange = function() {
         // document.getElementById("Twitch_Updated").appendChild(link);
     }
 }
+videoinfo.setRequestHeader("Accept", "application/vnd.twitchtv.v5+json");
 videoinfo.setRequestHeader("Client-ID", "630so911da4xpdikvv92t5nrke4h96");
 videoinfo.send();
 
 
 
 var liveinfo = new XMLHttpRequest();
-liveinfo.open("GET", "https://api.twitch.tv/kraken/streams/godjj", true);
+liveinfo.open("GET", "https://api.twitch.tv/kraken/streams/11561802", true);
 liveinfo.onreadystatechange = function() {
     if (liveinfo.readyState == 4) {
         var obj = JSON.parse(liveinfo.responseText);
@@ -226,6 +229,7 @@ liveinfo.onreadystatechange = function() {
         }
     }
 }
+liveinfo.setRequestHeader("Accept", "application/vnd.twitchtv.v5+json");
 liveinfo.setRequestHeader("Client-ID", "630so911da4xpdikvv92t5nrke4h96");
 liveinfo.send();
 

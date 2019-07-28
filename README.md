@@ -32,6 +32,11 @@
 * Notification icon made by Darius Dan from www.flaticon.com, licensed under CC BY 3.0
 
 ### 更新資訊：
+<h4>1.6.0</h4>
+<p><strong>Twitch v3 API 即將完全關閉，更新Twitch API(v3->v5)</strong></p>
+<p><strong>官方說明：</strong><a href="https://dev.twitch.tv/docs/v5/guides/migration/">v3 to v5 Migration Guide</a></p>
+<p><strong>最近開台通知問題推測是這個所導致</strong></p>
+<p><strong>以後遇到通知失控的問題，可以先把通知從設定中先關掉</strong></p>
 <h4>1.5.8</h4>
 <p><strong>傳說再起，韓服戰績重出江湖</strong></p>
 <h4>1.5.7</h4>

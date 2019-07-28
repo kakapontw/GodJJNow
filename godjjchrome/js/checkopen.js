@@ -45,7 +45,7 @@ chrome.storage.onChanged.addListener(function(changes, areaName) {
 
 function checkOpen() {
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", "https://api.twitch.tv/kraken/streams/godjj", true);
+    xhr.open("GET", "https://api.twitch.tv/kraken/streams/11561802", true);
     xhr.onreadystatechange = function() {
         if (xhr.readyState == 4) {
             var obj = JSON.parse(xhr.responseText);
@@ -63,6 +63,7 @@ function checkOpen() {
             }
         }
     }
+    xhr.setRequestHeader("Accept", "application/vnd.twitchtv.v5+json");
     xhr.setRequestHeader("Client-ID", "630so911da4xpdikvv92t5nrke4h96");
     xhr.send();
 }

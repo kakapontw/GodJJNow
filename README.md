@@ -32,6 +32,8 @@
 * Notification icon made by Darius Dan from www.flaticon.com, licensed under CC BY 3.0
 
 ### 更新資訊：
+<h4>1.6.1</h4>
+<p><strong>TWITCH GODJJ</strong></p>
 <h4>1.6.0</h4>
 <p><strong>Twitch v3 API 即將完全關閉，更新Twitch API(v3->v5)</strong></p>
 <p><strong>官方說明：</strong><a href="https://dev.twitch.tv/docs/v5/guides/migration/">v3 to v5 Migration Guide</a></p>

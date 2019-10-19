@@ -1,7 +1,7 @@
 ﻿document.addEventListener('DOMContentLoaded', function(dcle) {
     var buttonName = ["FBbutton", "Youtubebutton", "LoLTWbutton", "LoLbutton", "Musicbutton", "Music2button", "MEJJbutton", "Twitchbutton"];
     var buttonUrl = ["https://www.facebook.com/GodJJLOL", "https://www.youtube.com/channel/UCt--8DKolHNzogSofX35fRQ", 
-        "https://lol.moa.tw/summoner/show/alimamado", "https://www.op.gg/summoner/userName=SearchHOUO",
+        "https://lol.moa.tw/summoner/show/alimamado", "https://www.op.gg/summoner/userName=TWITCHGODJJ",
         "https://www.youtube.com/playlist?list=PLicQ4e8xsEiH3AnRUFkkwJVaHHvLi-ylL",
         "https://www.youtube.com/playlist?list=PLBGxXkqJe9DSoclWSk6idRDyTYtmWxlcw", 
         "http://www.ment.com.tw/zh-tw/artist_info.php?id=14", "https://www.twitch.tv/godjj"
@@ -52,7 +52,7 @@ browser.storage.local.get({
 });
 
 var lolinfo = new XMLHttpRequest();
-lolinfo.open("GET", "https://www.op.gg/summoner/userName=SearchHOUO", true);
+lolinfo.open("GET", "https://www.op.gg/summoner/userName=TWITCHGODJJ", true);
 lolinfo.onreadystatechange = function() {
     if (lolinfo.readyState == 4) {
         var tempStr = lolinfo.responseText;
@@ -266,7 +266,7 @@ function clearString(s) {
 }
 
 var lastteninfo = new XMLHttpRequest();
-lastteninfo.open("GET", "https://www.op.gg/summoner/matches/ajax/averageAndList/startInfo=0&summonerId=72520577&type=total", true);
+lastteninfo.open("GET", "https://www.op.gg/summoner/matches/ajax/averageAndList/startInfo=0&summonerId=83588455&type=total", true);
 lastteninfo.onreadystatechange = function() {
     if (lastteninfo.readyState == 4) {
         var obj = JSON.parse(lastteninfo.responseText);

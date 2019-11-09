@@ -90,7 +90,7 @@ lolinfo.onreadystatechange = function() {
 lolinfo.send();
 
 var lolinfoTW = new XMLHttpRequest();
-lolinfoTW.open("GET", "https://lol.moa.tw/Ajax/rankeddashboard/7513983/SOLO5V5", true);
+lolinfoTW.open("GET", "https://lol.moa.tw/Ajax/rankeddashboard/7513983/RANKED_SOLO_5x5", true);
 lolinfoTW.onreadystatechange = function() {
     if (lolinfoTW.readyState == 4) {
         var tempStr = lolinfoTW.responseText;
@@ -119,11 +119,13 @@ lolinfoTW.onreadystatechange = function() {
             document.getElementById("LoL_tierRankTW").innerText = tierRank + " " + tierRank2;
         }
 
-        var winRank = tempStr.split("alimamado</a></td>")[1].split("<td class=\"text-center strong\">")[1].split("</td>")[0];
+        var lolWinTw = tempStr.split("alimamado</a></td>")[1].split("<td class=\"text-center strong\">")[1].split("</td>")[0];
+        var lolLossTw = tempStr.split("alimamado</a></td>")[1].split("<td class=\"hide text-center strong\">")[1].split("</td>")[0];
+        var lolWinRatioTw = tempStr.split("alimamado</a></td>")[1].split("<td class=\"hide text-center strong\">")[2].split("</td>")[0];
         document.getElementById("LoL_LeaguePointsTW").innerText = bostr;
-        document.getElementById("LoL_WinTW").innerText = winRank;
-        document.getElementById("LoL_LossTW").innerText = "暫無資料";
-        document.getElementById("LoL_WinRatioTW").innerText = "暫無資料";
+        document.getElementById("LoL_WinTW").innerText = lolWinTw;
+        document.getElementById("LoL_LossTW").innerText = lolLossTw;
+        document.getElementById("LoL_WinRatioTW").innerText = lolWinRatioTw;
     }
 }
 lolinfoTW.send();

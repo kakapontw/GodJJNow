@@ -32,6 +32,8 @@
 * Notification icon made by Darius Dan from www.flaticon.com, licensed under CC BY 3.0
 
 ### 更新資訊：
+<h4>1.6.2</h4>
+<p><strong>alimamado準備重回菁英，台服戰績正式回歸</strong></p>
 <h4>1.6.1</h4>
 <p><strong>TWITCH GODJJ</strong></p>
 <h4>1.6.0</h4>

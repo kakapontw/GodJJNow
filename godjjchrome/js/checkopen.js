@@ -112,7 +112,7 @@ function audio() {
     }, function(items) {
         var soundVersion = "/audio/88BOU.mp3"
         if (items.getSoundVersion) {
-            soundVersion = "/audio/88BOU_niniz.mp3"
+            soundVersion = "/audio/jungle_city.mp3"
         }
         var audio = document.createElement("audio");
         audio.setAttribute("controls", "controls");

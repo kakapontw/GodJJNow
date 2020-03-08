@@ -1,10 +1,12 @@
 ﻿document.addEventListener('DOMContentLoaded', function(dcle) {
-    var buttonName = ["FBbutton", "Youtubebutton", "LoLTWbutton", "LoLbutton", "Musicbutton", "Music2button", "MEJJbutton", "Twitchbutton"];
+    var buttonName = ["FBbutton", "Youtubebutton", "LoLTWbutton", "LoLCNbutton", "LoLbutton", 
+        "Musicbutton", "Music2button", "MEJJbutton", "JGamersbutton", "Twitchbutton"];
     var buttonUrl = ["https://www.facebook.com/GodJJLOL", "https://www.youtube.com/channel/UCt--8DKolHNzogSofX35fRQ", 
-        "https://lol.moa.tw/summoner/show/alimamado", "https://www.op.gg/summoner/userName=TWITCHGODJJ",
+        "https://lol.moa.tw/summoner/show/alimamado", "https://lol.qq.com/act/a20170704super/ranking.shtml", "https://www.op.gg/summoner/userName=TWITCHGODJJ",
         "https://www.youtube.com/playlist?list=PLicQ4e8xsEiH3AnRUFkkwJVaHHvLi-ylL",
         "https://www.youtube.com/playlist?list=PLBGxXkqJe9DSoclWSk6idRDyTYtmWxlcw", 
-        "http://www.ment.com.tw/zh-tw/artist_info.php?id=14", "https://www.twitch.tv/godjj"
+        "http://www.ment.com.tw/zh-tw/artist_info.php?id=14", 
+        "https://www.youtube.com/channel/UCNAmbRgIsM8xKDJR47sLYAw", "https://www.twitch.tv/godjj"
     ];
     for (var i = 0; i < buttonName.length; i++) {
         var button = document.getElementById(buttonName[i]);
@@ -36,14 +38,14 @@ browser.storage.local.get({
             link.onclick = function() { browser.tabs.create({ "url": clearString(this.href) }) };
             document.getElementById("time" + (i + 1)).innerText = key;
             document.getElementById("m" + (i + 1)).appendChild(link);
-        } else if (value.length > 15) {
+        } else if (value.length > 12) {
             document.getElementById("m" + (i + 1)).setAttribute("data-container", "body");
             document.getElementById("m" + (i + 1)).setAttribute("data-toggle", "popover");
             document.getElementById("m" + (i + 1)).setAttribute("data-placement", "top");
             document.getElementById("m" + (i + 1)).setAttribute("data-trigger", "hover");
             document.getElementById("m" + (i + 1)).setAttribute("data-content", value);
             document.getElementById("time" + (i + 1)).innerText = key;
-            document.getElementById("m" + (i + 1)).innerText = value.substring(0, 15) + " ...";
+            document.getElementById("m" + (i + 1)).innerText = value.substring(0, 12) + " ...";
         } else {
             document.getElementById("time" + (i + 1)).innerText = key;
             document.getElementById("m" + (i + 1)).innerText = value;
@@ -88,6 +90,36 @@ lolinfo.onreadystatechange = function() {
     }
 }
 lolinfo.send();
+
+var tier_dict = {'31':'最强王者','30':'傲世宗师','29':'超凡大师','28':'璀璨钻石','27':'华贵铂金','26':'荣耀黄金','25':'不屈白银','24':'英勇黄铜','23':'坚韧黑铁'};
+var rank_dict = {'0':'I','1':'II','2':'III','3':'IIII'};
+var lolinfoCN = new XMLHttpRequest();
+lolinfoCN.open("GET", "https://lol.sw.game.qq.com/lol/commact/?proj=TopCanyon&c=ActionUser&a=UserRankList&e_num=25&Page=1&SearchName=GODJJ", true);
+lolinfoCN.onreadystatechange = function() {
+    if (lolinfoCN.readyState == 4) {
+        var tempStr = lolinfoCN.responseText;
+        var dataArr = JSON.parse(tempStr.split(" = ")[1]);
+        document.getElementById("LoL_NameCN").innerText = dataArr.list[0].name;
+
+        var check_list = ["31", "30", "29"]
+        if(check_list.includes(dataArr.list[0].tier)){
+            document.getElementById("LoL_tierRankCN").innerText = tier_dict[dataArr.list[0].tier];
+        } else {
+            document.getElementById("LoL_tierRankCN").innerText = tier_dict[dataArr.list[0].tier] + rank_dict[dataArr.list[0].rank];
+        }
+
+        document.getElementById("LoL_LeaguePointsCN").innerText = dataArr.list[0].league_points;
+        
+        var lolWinCN = parseInt(dataArr.list[0].total_wins);
+        var lolLossTw = parseInt(dataArr.list[0].total_losses) + parseInt(dataArr.list[0].total_leaves);
+        var lolWinRatioTw = Math.round((lolWinCN*100/(lolWinCN+lolLossTw))) + '%';
+
+        document.getElementById("LoL_WinCN").innerText = dataArr.list[0].total_wins;
+        document.getElementById("LoL_LossCN").innerText = parseInt(dataArr.list[0].total_losses) + parseInt(dataArr.list[0].total_leaves);
+        document.getElementById("LoL_WinRatioCN").innerText = lolWinRatioTw;
+    }
+}
+lolinfoCN.send();
 
 var lolinfoTW = new XMLHttpRequest();
 lolinfoTW.open("GET", "https://lol.moa.tw/Ajax/rankeddashboard/7513983/RANKED_SOLO_5x5", true);
@@ -298,7 +330,7 @@ lastteninfo.onreadystatechange = function() {
                 winOrlose[i - 1] = "Defeat";
             }
         }
-        draw("myChart", date.reverse(), winOrlose.reverse(), kda.reverse());
+        draw("KR_LOL_Last_10_Games", date.reverse(), winOrlose.reverse(), kda.reverse());
     }
 }
 lastteninfo.send();
@@ -338,7 +370,7 @@ lastteninfoTW.onreadystatechange = function() {
         for (var i = 1; i < tempkdaarr.length; i++) {
             kda.push(clearString(tempkdaarr[i].split("<br/>(")[1].split(")\n</td>")[0]));
         }
-        draw("myChartTW", date.reverse(), winOrlose.reverse(), kda.reverse());
+        draw("TW_LOL_Last_10_Games", date.reverse(), winOrlose.reverse(), kda.reverse());
     }
 }
 lastteninfoTW.send();
@@ -351,6 +383,6 @@ function transferFailed(evt) {
     link.innerText = "由於短期間按太多次 要去戰績網解鎖";
     link.onclick = function() { chrome.tabs.create({ "url": "https://lol.moa.tw/recaptcha/challenge" }) };
 
-    document.getElementById("gameTW").appendChild(link);
-    document.getElementById("myChartTW").style.visibility = "hidden";
+    document.getElementById("last10Games").appendChild(link);
+    document.getElementById("TW_LOL_Last_10_Games").style.visibility = "hidden";
 }

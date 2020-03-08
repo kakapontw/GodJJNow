@@ -16,142 +16,143 @@
 <body>
     <div class="container">
         <div class="row">
-            <div class="col-xs-12" style="background-color: black;">
-                <img class="center-block" style="width: 500px;" src="https://static-cdn.jtvnw.net/jtv_user_pictures/a717b7d2-9e5b-40c0-bde1-edca2d54498a-profile_banner-480.png">
+            <div class="col-12" style="background-color: black;">
+                <img class="center-block" style="width: 300px;" src="https://static-cdn.jtvnw.net/jtv_user_pictures/a717b7d2-9e5b-40c0-bde1-edca2d54498a-profile_banner-480.png">
             </div>
         </div>
         <div class="row">
             <div class="btn-group btn-group-justified" role="group" aria-label="...">
-                <a id="FBbutton" class="btn btn-default"><img src="/img/facebook.png"><b style="color: #3B5998;"> JJ Facebook</b></a>
-                <a id="Youtubebutton" class="btn btn-default"><img src="/img/youtube.png"><b style="color: #cd201f;"> JJ Youtube</b></a>
+                <a id="FBbutton" class="btn btn-default"><img src="/img/f_logo_RGB-Blue_72.png" style="width: 20px;"></a>
+                <a id="Youtubebutton" class="btn btn-default"><img src="/img/youtube_social_icon_red.png" style="width: 20px;"></a>
                 <div class="btn-group">
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img src="/img/podium.png"><b> JJ Rank </b><span class="caret"></span>
+                        <img src="/img/rank.png" style="width: 20px;">
                     </button>
-                    <ul class="dropdown-menu">
+                    <ul class="dropdown-menu dropdown-menu-right">
                         <li><a id="LoLTWbutton"><b> LOL戰績網(LoL TW) </b></a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a id="LoLCNbutton"><b> 峽谷之巔官網(LoL CN) </b></a></li>
                         <li role="separator" class="divider"></li>
                         <li><a id="LoLbutton"><b> OPGG(LoL KR) </b></a></li>
                     </ul>
                 </div>
                 <div class="btn-group">
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img src="/img/monitor.png"><b> More </b><span class="caret"></span>
+                        <img src="/img/link.png" style="width: 20px;">
                     </button>
-                    <ul class="dropdown-menu">
+                    <ul class="dropdown-menu dropdown-menu-right">
                         <li><a id="Musicbutton"><b> JJ舊歌單 </b></a></li>
                         <li role="separator" class="divider"></li>
                         <li><a id="Music2button"><b> JJ新歌單(2017) </b></a></li>
                         <li role="separator" class="divider"></li>
                         <li><a id="MEJJbutton"><b> ME官網JJ介紹 </b></a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a id="JGamersbutton"><b> J群玩家 YT </b></a></li>
                     </ul>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="btn-group btn-group-justified" role="group" aria-label="...">
-                <a id="Twitchbutton" class="btn btn-default"><span id="twitchbadge" class="badge" style="background-color: red; margin-right: 10px;"></span><img src="/img/twitch.png""><b style="color: #6441A4;">/GodJJ </b><span id="twitchbadge2" class="badge" style="margin-left: 5px;""></span></a>
-                <a id="Newsbutton" class="btn btn-default"><span id="newsbadge" class="badge" style="background-color: #F9BF45; margin-right: 10px;">JJ News</span><marquee id="newsMarquee" behavior="alternate" style="width: 200px;"><b id="news"></b></marquee></a>
+                <a id="Twitchbutton" class="btn btn-default" style="background-color: #9147FF;">
+                    <span id="twitchbadge" class="badge" style="background-color: red; margin-right: 10px;"></span>
+                    <img src="/img/TwitchGlitchBlackOps.png" style="width: 18px; margin-right: 5px;">
+                    <b style="color: whitesmoke;">#GodJJ </b>
+                    <span id="twitchbadge2" class="badge" style="margin-left: 5px;"></span>
+                </a>
+            </div>
+        </div>
+        <div class="row" style="display: none;">
+            <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                <a id="Newsbutton" class="btn btn-default">
+                    <span id="newsbadge" class="badge" style="background-color: #F9BF45; margin-right: 10px;">JJ News</span>
+                    <marquee id="newsMarquee" behavior="alternate" style="width: 200px;"><b id="news"></b></marquee>
+                </a>
             </div>
         </div>
         <div class="row">
             <ul class="nav nav-tabs" role="tablist" id="myTabs">
                 <li role="presentation" class="active"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab"><b>Profile</b></a></li>
-                <li role="presentation"><a href="#game" aria-controls="game" role="tab" data-toggle="tab"><b>Last 10 games(LoL)</b></a></li>
-                <li role="presentation"><a href="#gameTW" aria-controls="gameTW" role="tab" data-toggle="tab"><b>Last 10 games(LoLTW)</b></a></li>
+                <li role="presentation"><a href="#last10Games" aria-controls="last10Games" role="tab" data-toggle="tab"><b>Last 10 Games</b></a></li>
                 <li role="presentation"><a href="#message" aria-controls="message" role="tab" data-toggle="tab"><b>Message</b></a></li>
             </ul>
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane fade in active" id="profile">
-                    <div class="col-xs-6">
-                        <div class="panel panel-primary" style="border: 0px; margin-top: 5px; height: 275px;">
-                            <div class="panel-heading" style="background-color: #00B2B7; border-color: #00B2B7;">
-                                <h3 class="panel-title text-center" style="font-weight:bold;">League of Legends (TW)</h3>
-                            </div>
-                            <div class="panel-body" style="padding :0px 10px 0px 10px;">
-                                <table class="table table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th colspan="2" id="LoL_NameTW" class="text-center">讀取中</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td class="text-center">牌位</td>
-                                            <td id="LoL_tierRankTW" class="text-center">讀取中</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">分數</td>
-                                            <td id="LoL_LeaguePointsTW" class="text-center">讀取中</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">勝</td>
-                                            <td id="LoL_WinTW" class="text-center">讀取中</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">敗</td>
-                                            <td id="LoL_LossTW" class="text-center">讀取中</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">勝率</td>
-                                            <td id="LoL_WinRatioTW" class="text-center">讀取中</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-6">
-                        <div class="panel panel-primary" style="border: 0px; margin-top: 5px; height: 275px;">
-                            <div class="panel-heading" style="background-color: #00B2B7; border-color: #00B2B7;">
-                                <h3 class="panel-title text-center" style="font-weight:bold;">League of Legends (KR)</h3>
-                            </div>
-                            <div class="panel-body" style="padding :0px 10px 0px 10px;">
-                                <table class="table table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th colspan="2" id="LoL_Name" class="text-center">讀取中</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td class="text-center">牌位</td>
-                                            <td id="LoL_tierRank" class="text-center">讀取中</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">分數</td>
-                                            <td id="LoL_LeaguePoints" class="text-center">讀取中</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">勝</td>
-                                            <td id="LoL_Win" class="text-center">讀取中</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">敗</td>
-                                            <td id="LoL_Loss" class="text-center">讀取中</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">勝率</td>
-                                            <td id="LoL_WinRatio" class="text-center">讀取中</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
+                    <table class="table table-striped" style="margin-bottom: 0px;">
+                        <tbody>
+                            <tr>
+                                <th colspan="5" class="history text-center">
+                                    <span class="badge" style="background-color: rgb(0, 162, 255); margin-right: 10px;">KR</span>
+                                    <b id="LoL_Name">讀取中</b>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th class="history text-center">牌位</th>
+                                <th class="history text-center">分數</th>
+                                <th class="history text-center">勝</th>
+                                <th class="history text-center">敗</th>
+                                <th class="history text-center">勝率</th>
+                            </tr>
+                            <tr>
+                                <td id="LoL_tierRank" class="text-center">讀取中</td>
+                                <td id="LoL_LeaguePoints" class="text-center">讀取中</td>
+                                <td id="LoL_Win" class="text-center">讀取中</td>
+                                <td id="LoL_Loss" class="text-center">讀取中</td>
+                                <td id="LoL_WinRatio" class="text-center">讀取中</td>
+                            </tr>
+                            <tr>
+                                <th colspan="5" class="history text-center">
+                                    <span class="badge" style="background-color: red; margin-right: 10px;">CN</span>
+                                    <b id="LoL_NameCN">讀取中</b>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th class="history text-center">牌位</th>
+                                <th class="history text-center">分數</th>
+                                <th class="history text-center">勝</th>
+                                <th class="history text-center">敗</th>
+                                <th class="history text-center">勝率</th>
+                            </tr>
+                            <tr>
+                                <td id="LoL_tierRankCN" class="text-center">讀取中</td>
+                                <td id="LoL_LeaguePointsCN" class="text-center">讀取中</td>
+                                <td id="LoL_WinCN" class="text-center">讀取中</td>
+                                <td id="LoL_LossCN" class="text-center">讀取中</td>
+                                <td id="LoL_WinRatioCN" class="text-center">讀取中</td>
+                            </tr>
+                            <tr>
+                                <th colspan="5" class="text-center">
+                                    <span class="badge" style="background-color: green; margin-right: 10px;">TW</span>
+                                    <b id="LoL_NameTW">讀取中</b>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th class="history text-center">牌位</th>
+                                <th class="history text-center">分數</th>
+                                <th class="history text-center">勝</th>
+                                <th class="history text-center">敗</th>
+                                <th class="history text-center">勝率</th>
+                            </tr>
+                            <tr>
+                                <td id="LoL_tierRankTW" class="text-center">讀取中</td>
+                                <td id="LoL_LeaguePointsTW" class="text-center">讀取中</td>
+                                <td id="LoL_WinTW" class="text-center">讀取中</td>
+                                <td id="LoL_LossTW" class="text-center">讀取中</td>
+                                <td id="LoL_WinRatioTW" class="text-center">讀取中</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <div role="tabpanel" class="tab-pane fade" id="game">
-                    <canvas id="myChart" width="600" height="270"></canvas>
-                </div>
-                <div role="tabpanel" class="tab-pane fade" id="gameTW">
-                    <canvas id="myChartTW" width="600" height="275"></canvas>
+                <div role="tabpanel" class="tab-pane fade" id="last10Games">
+                    <canvas id="KR_LOL_Last_10_Games" style="padding: 0px 5px 5px;"></canvas>
+                    <canvas id="TW_LOL_Last_10_Games" style="padding: 0px 5px 5px;"></canvas>
                 </div>
                 <div role="tabpanel" class="tab-pane fade" id="message">
-                    <table class="table table-striped" style="margin-bottom: 0px;">
+                    <table class="table table-striped" style="margin-bottom: 0px;"> 
                         <thead>
                             <tr>
-                                <th class="history text-center" style="width:50px;">#</th>
-                                <th class="history text-center" style="width:200px;">Time</th>
+                                <th class="history text-center" style="width:10px;">#</th>
+                                <th class="history text-center" style="width:140px;">Time</th>
                                 <th class="history text-center">Message</th>
                             </tr>
                         </thead>

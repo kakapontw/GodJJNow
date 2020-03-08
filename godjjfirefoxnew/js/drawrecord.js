@@ -37,23 +37,29 @@ function draw(name, dateArr, dataArr, kdaArr) {
         },
         options: {
             responsive: true,
+            title: {
+                display: true,
+                text: name
+            },
             scales: {
                 xAxes: [{
-                    display: true,
-                    scaleLabel: {
-                        display: true,
-                        //labelString: 'Time'
-                    }
+                    display: false
                 }],
                 yAxes: [{
                     type: 'category',
                     position: 'left',
                     display: true,
+                    ticks: {
+                        beginAtZero: true
+                    }
                 }, {
                     type: "linear", // only linear but allow scale type registration. This allows extensions to exist solely for log scale for instance
                     display: true,
                     position: "right",
                     id: "y-axis-2",
+                    ticks: {
+                        beginAtZero: true
+                    }
                 }]
             }
         }

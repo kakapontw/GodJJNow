@@ -2,7 +2,7 @@
     "manifest_version": 2,
     "name": "GodJJ Now",
     "description": "是一款真正的JJ套件",
-    "version": "1.6.3",
+    "version": "2.0.0",
     "permissions": [
         "alarms",
         "storage",
@@ -11,7 +11,8 @@
         "http://www.op.gg/",
         "https://tw.op.gg/",
         "http://tw.op.gg/",
-        "https://lol.moa.tw/"
+        "https://lol.moa.tw/",
+        "https://lol.sw.game.qq.com/"
     ],
     "options_ui":
     {

@@ -10,7 +10,7 @@
 ### 目前包含：
 - Facebook、Youtube、歌單等等相關資訊連結
 - LoL戰績摘要
-- 圖奇開台通知(含叭叭包鈴聲)
+- 圖奇開台通知(含GodJJ鈴聲)
 - JJ聊天室資訊
 
 ### 使用者隱私聲明：
@@ -31,6 +31,9 @@
 * Notification icon made by Darius Dan from www.flaticon.com, licensed under CC BY 3.0
 
 ### 更新資訊：
+<h4>2.0.1</h4>
+<p><strong>細部畫面調整</strong></p>
+<hr>
 <h4>2.0.0</h4>
 <p><strong>2.0版套件來囉！</strong></p>
 <p><strong>大幅縮減資料頁面大小，並調整部分資料呈現方式</strong></p>

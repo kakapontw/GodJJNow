@@ -21,7 +21,7 @@ function handleChat(channel, user, message, self) {
             JJMessage: '{"Message":[]}'
         }, function(items) {
             var messageArr = JSON.parse(items.JJMessage);
-            var time = moment().format('YYYY-MM-DD HH:mm:ss');
+            var time = moment().format('MM-DD HH:mm');
             var messageJson = '{"' + time + '": "' + message + '"}';
             messageArr.Message[messageArr.Message.length] = JSON.parse(messageJson);
             if (messageArr.Message.length > 7) messageArr.Message.shift();

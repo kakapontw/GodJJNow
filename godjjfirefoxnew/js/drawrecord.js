@@ -37,6 +37,7 @@ function draw(name, dateArr, dataArr, kdaArr) {
         },
         options: {
             responsive: true,
+            maintainAspectRatio: false,
             title: {
                 display: true,
                 text: name

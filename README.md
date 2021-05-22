@@ -34,6 +34,16 @@
 * Notification icon made by Darius Dan from www.flaticon.com, licensed under CC BY 3.0
 
 ### 更新資訊：
+<h4>2.2.0</h4>
+<p><strong>修正無法自動點擊"國王的金幣"額外獎勵的問題</strong></p>
+<p><strong>並將點金幣功能，延伸至全部Twitch實況都會啟動</strong></p>
+<p><strong>這代表J群以及其他台的額外獎勵寶箱也會自動點囉</strong></p>
+<p></p>
+<p><strong>另外有的小變更</strong></p>
+<p><strong>1. 移除峽谷之巔資訊，現在都只打韓服了(台服有時會用)</strong></p>
+<p><strong>2. 重啟News功能，最近活動比較多，可以幫忙公告一些事情</strong></p>
+<p><strong>3. 畫面小調整以及部分連結更新</strong></p>
+<hr>
 <h4>2.1.0</h4>
 <p><strong>新增自動點擊"國王的金幣"額外獎勵功能</strong></p>
 <p><strong>經過測試，獎勵按鈕有跳出來，套件一般是不會有問題</strong></p>
@@ -47,18 +57,6 @@
 <p><strong>大幅縮減資料頁面大小，並調整部分資料呈現方式</strong></p>
 <p><strong>另外有新增一些資訊及連結</strong></p>
 <hr>
-<h4>1.6.3</h4>
-<p><strong>更換特別版音效，現在為密林之城 ft. GodJJ</strong></p>
-<h4>1.6.2</h4>
-<p><strong>alimamado準備重回菁英，台服戰績正式回歸</strong></p>
-<h4>1.6.1</h4>
-<p><strong>TWITCH GODJJ</strong></p>
-<h4>1.6.0</h4>
-<p><strong>Twitch v3 API 即將完全關閉，更新Twitch API(v3->v5)</strong></p>
-<p><strong>官方說明：</strong><a href="https://dev.twitch.tv/docs/v5/guides/migration/">v3 to v5 Migration Guide</a></p>
-<p><strong>最近開台通知問題推測是這個所導致</strong></p>
-<p><strong>以後遇到通知失控的問題，可以先把通知從設定中先關掉</strong></p>
-<hr>
-<h4>舊版本資訊</h4>
+<h4>舊版本資訊(1.x.x)</h4>
 
 [1_x_x_update.md](./1_x_x_update.md)

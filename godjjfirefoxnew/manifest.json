@@ -2,18 +2,18 @@
     "manifest_version": 2,
     "name": "GodJJ Now",
     "description": "是一款真正的JJ套件",
-    "version": "2.1.0",
+    "version": "2.2.0",
     "permissions": [
         "alarms",
         "storage",
         "notifications",
+        "webNavigation",
         "*://*.twitch.tv/*",
         "https://www.op.gg/",
         "http://www.op.gg/",
         "https://tw.op.gg/",
         "http://tw.op.gg/",
-        "https://lol.moa.tw/",
-        "https://lol.sw.game.qq.com/"
+        "https://lol.moa.tw/"
     ],
     "options_ui":
     {
@@ -21,7 +21,7 @@
     },
     "content_scripts": [
         {
-          "matches": ["*://*.twitch.tv/godjj"],
+          "matches": ["*://*.twitch.tv/*"],
           "js": ["/js/arrive.js", "/js/points-clicker.js"],
           "run_at" : "document_idle"
         }

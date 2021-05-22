@@ -1,12 +1,12 @@
 ﻿document.addEventListener('DOMContentLoaded', function(dcle) {
-    var buttonName = ["FBbutton", "Youtubebutton", "LoLTWbutton", "LoLCNbutton", "LoLbutton", 
-        "Musicbutton", "Music2button", "MEJJbutton", "JGamersbutton", "Twitchbutton"];
+    var buttonName = ["FBbutton", "Youtubebutton", "LoLTWbutton", "LoLbutton", 
+        "Musicbutton", "Music2button", "MEJJbutton", "JGamersbutton", "Godjjmebutton", "Twitchbutton"];
     var buttonUrl = ["https://www.facebook.com/GodJJLOL", "https://www.youtube.com/channel/UCt--8DKolHNzogSofX35fRQ", 
-        "https://lol.moa.tw/summoner/show/alimamado", "https://lol.qq.com/act/a20170704super/ranking.shtml", "https://www.op.gg/summoner/userName=TWITCHGODJJ",
+        "https://lol.moa.tw/summoner/show/alimamado", "https://www.op.gg/summoner/userName=TWITCHGODJJ",
         "https://www.youtube.com/playlist?list=PLicQ4e8xsEiH3AnRUFkkwJVaHHvLi-ylL",
         "https://www.youtube.com/playlist?list=PLBGxXkqJe9DSoclWSk6idRDyTYtmWxlcw", 
         "http://www.ment.com.tw/zh-tw/artist_info.php?id=14", 
-        "https://www.youtube.com/channel/UCNAmbRgIsM8xKDJR47sLYAw", "https://www.twitch.tv/godjj"
+        "https://www.youtube.com/channel/UCNAmbRgIsM8xKDJR47sLYAw", "https://godjj.me","https://www.twitch.tv/godjj"
     ];
     for (var i = 0; i < buttonName.length; i++) {
         var button = document.getElementById(buttonName[i]);
@@ -119,7 +119,7 @@ lolinfoCN.onreadystatechange = function() {
         document.getElementById("LoL_WinRatioCN").innerText = lolWinRatioTw;
     }
 }
-lolinfoCN.send();
+// lolinfoCN.send();
 
 var lolinfoTW = new XMLHttpRequest();
 lolinfoTW.open("GET", "https://lol.moa.tw/Ajax/rankeddashboard/7513983/RANKED_SOLO_5x5", true);
@@ -127,37 +127,41 @@ lolinfoTW.onreadystatechange = function() {
     if (lolinfoTW.readyState == 4) {
         var tempStr = lolinfoTW.responseText;
         document.getElementById("LoL_NameTW").innerText = "alimamado";
-        var tierRank = tempStr.split("<td id=\"league_tier\">")[1].split("<")[0];
-        var tierRank2 = tempStr.split("<td id=\"league_rank\">")[1].split("</td>")[0];
-        var bostr = "";
-        var botempStr = tempStr.split("alimamado</a></td>")[1].split("<td class=\"text-center strong\">")[2].split("</td>")[0];
-        if (botempStr.match(/icon-minus/g)) {
-            var win = 0,
-                loss = 0;
-            if (botempStr.match(/icon-ok/g)) {
-                win = botempStr.match(/icon-ok/g).length;
+        try {
+            var tierRank = tempStr.split("<td id=\"league_tier\">")[1].split("<")[0];
+            var tierRank2 = tempStr.split("<td id=\"league_rank\">")[1].split("</td>")[0];
+            var bostr = "";
+            var botempStr = tempStr.split("alimamado</a></td>")[1].split("<td class=\"text-center strong\">")[2].split("</td>")[0];
+            if (botempStr.match(/icon-minus/g)) {
+                var win = 0,
+                    loss = 0;
+                if (botempStr.match(/icon-ok/g)) {
+                    win = botempStr.match(/icon-ok/g).length;
+                }
+                if (botempStr.match(/icon-remove/g)) {
+                    loss = botempStr.match(/icon-remove/g).length;
+                }
+                bostr = "BO " + win + "W" + loss + "L";
+            } else {
+                bostr = tempStr.split("alimamado</a></td>")[1].split("<td class=\"text-center strong\">")[2].split("</td>")[0];
             }
-            if (botempStr.match(/icon-remove/g)) {
-                loss = botempStr.match(/icon-remove/g).length;
+
+            if(tierRank2.indexOf("NA") > -1){
+                document.getElementById("LoL_tierRankTW").innerText = tierRank
+            }else{
+                document.getElementById("LoL_tierRankTW").innerText = tierRank + " " + tierRank2;
             }
-            bostr = "BO " + win + "W" + loss + "L";
-        } else {
-            bostr = tempStr.split("alimamado</a></td>")[1].split("<td class=\"text-center strong\">")[2].split("</td>")[0];
-        }
 
-        if(tierRank2.indexOf("NA") > -1){
-            document.getElementById("LoL_tierRankTW").innerText = tierRank
-        }else{
-            document.getElementById("LoL_tierRankTW").innerText = tierRank + " " + tierRank2;
+            var lolWinTw = tempStr.split("alimamado</a></td>")[1].split("<td class=\"text-center strong\">")[1].split("</td>")[0];
+            var lolLossTw = tempStr.split("alimamado</a></td>")[1].split("<td class=\"hide text-center strong\">")[1].split("</td>")[0];
+            var lolWinRatioTw = tempStr.split("alimamado</a></td>")[1].split("<td class=\"hide text-center strong\">")[2].split("</td>")[0];
+            document.getElementById("LoL_LeaguePointsTW").innerText = bostr;
+            document.getElementById("LoL_WinTW").innerText = lolWinTw;
+            document.getElementById("LoL_LossTW").innerText = lolLossTw;
+            document.getElementById("LoL_WinRatioTW").innerText = lolWinRatioTw;
+        } catch (error) {
+            console.log(error)
         }
-
-        var lolWinTw = tempStr.split("alimamado</a></td>")[1].split("<td class=\"text-center strong\">")[1].split("</td>")[0];
-        var lolLossTw = tempStr.split("alimamado</a></td>")[1].split("<td class=\"hide text-center strong\">")[1].split("</td>")[0];
-        var lolWinRatioTw = tempStr.split("alimamado</a></td>")[1].split("<td class=\"hide text-center strong\">")[2].split("</td>")[0];
-        document.getElementById("LoL_LeaguePointsTW").innerText = bostr;
-        document.getElementById("LoL_WinTW").innerText = lolWinTw;
-        document.getElementById("LoL_LossTW").innerText = lolLossTw;
-        document.getElementById("LoL_WinRatioTW").innerText = lolWinRatioTw;
     }
 }
 lolinfoTW.send();
@@ -196,17 +200,16 @@ twitchinfo.onreadystatechange = function() {
     if (twitchinfo.readyState == 4) {
         var obj = JSON.parse(twitchinfo.responseText);
         //jjinfo       
-        // document.getElementById("Twitch_Name").innerText = obj.display_name + "(" + obj.name + ")";
-        // document.getElementById("Twitch_Views").innerText = obj.views;
-        // document.getElementById("Twitch_Followers").innerText =  obj.followers;
+        document.getElementById("Twitch_Name").innerText = obj.display_name + "(" + obj.name + ")";
+        document.getElementById("Twitch_Views").innerText = obj.views;
+        document.getElementById("Twitch_Followers").innerText =  obj.followers;
         var CreatedTime = moment.tz(obj.created_at, "Asia/Taipei").format('YYYY/MM/DD');
-        // document.getElementById("Twitch_Created").innerText = CreatedTime+" "+ getYMdiff(moment(),moment.tz(obj.created_at,"Asia/Taipei")) ;
-
+        document.getElementById("Twitch_Created").innerText = CreatedTime+" "+ getYMdiff(moment(),moment.tz(obj.created_at,"Asia/Taipei")) ;
     }
 }
 twitchinfo.setRequestHeader("Accept", "application/vnd.twitchtv.v5+json");
 twitchinfo.setRequestHeader("Client-ID", "630so911da4xpdikvv92t5nrke4h96");
-twitchinfo.send();
+// twitchinfo.send();
 
 var teamsinfo = new XMLHttpRequest();
 teamsinfo.open("GET", "https://api.twitch.tv/kraken/channels/11561802/teams", true);
@@ -218,13 +221,13 @@ teamsinfo.onreadystatechange = function() {
         link.innerText = obj.teams[0].display_name + "(" + obj.teams[0].name + ")";
         link.onclick = function() { chrome.tabs.create({ "url": clearString(this.href) }) };
         //jjinfo
-        // document.getElementById("Twitch_Teams").innerText = "";
-        // document.getElementById("Twitch_Teams").appendChild(link);
+        document.getElementById("Twitch_Teams").innerText = "";
+        document.getElementById("Twitch_Teams").appendChild(link);
     }
 }
 teamsinfo.setRequestHeader("Accept", "application/vnd.twitchtv.v5+json");
 teamsinfo.setRequestHeader("Client-ID", "630so911da4xpdikvv92t5nrke4h96");
-teamsinfo.send();
+// teamsinfo.send();
 
 var videoinfo = new XMLHttpRequest();
 videoinfo.open("GET", "https://api.twitch.tv/kraken/channels/11561802/videos?broadcast_type=archive", true);
@@ -242,14 +245,13 @@ videoinfo.onreadystatechange = function() {
         link.onclick = function() { chrome.tabs.create({ "url": clearString(this.href) }) };
         link.setAttribute("title", obj.videos[0].title);
         //jjinfo
-        // document.getElementById("Twitch_Updated").innerText = "";
-        // document.getElementById("Twitch_Updated").appendChild(link);
+        document.getElementById("Twitch_Updated").innerText = "";
+        document.getElementById("Twitch_Updated").appendChild(link);
     }
 }
 videoinfo.setRequestHeader("Accept", "application/vnd.twitchtv.v5+json");
 videoinfo.setRequestHeader("Client-ID", "630so911da4xpdikvv92t5nrke4h96");
-videoinfo.send();
-
+// videoinfo.send();
 
 
 var liveinfo = new XMLHttpRequest();
@@ -346,7 +348,7 @@ lastteninfoTW.onreadystatechange = function() {
 
         var tempDateparr = obj.split("<div class=\"pull-right\">");
         for (var i = 1; i < tempDateparr.length; i += 2) {
-            var Taipei = moment.tz(tempDateparr[i].split("</div>")[0], "Asia/Taipei").format('MM/DD, HH:mm');
+            var Taipei = moment.tz(tempDateparr[i].split("</div>")[0].split("</stats>")[1].split("</span>")[0], "YYYY-MM-DD HH:mm:ss", "Asia/Taipei").format('MM/DD, HH:mm');
             datetemp.push(Taipei);
         }
         var tempChampionsparr = obj.split("/lol-info/champions/tile/");

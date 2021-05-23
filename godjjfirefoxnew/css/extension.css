@@ -1,32 +1,40 @@
-  body {
-      width: 300px;
-      margin: 0;
-      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif, "微軟正黑體", "微软雅黑", "メイリオ", "맑은 고딕";
-      font-size: 12px;
-      /*line-height: 14px;*/
-      color: #333333;
-      background-color: #ffffff;
-  }
+body {
+    width: 350px;
+    margin: 0;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif, "微軟正黑體", "微软雅黑", "メイリオ", "맑은 고딕";
+    font-size: 12px;
+    /*line-height: 14px;*/
+    color: #333333;
+    background-color: #ffffff;
+}
 
-  th {
-      font-size: 14px;
-      font-weight: bold;
-  }
+th {
+    font-size: 14px;
+    font-weight: bold;
+}
 
-  th.history {
-      font-size: 14px;
-      font-weight: bold;
-  }
+th.history {
+    font-size: 14px;
+    font-weight: bold;
+}
 
-  td {
-      font-size: 12px;
-      font-weight: bold;
-  }
+td {
+    font-size: 12px;
+    font-weight: bold;
+}
 
-  .btn {
+.btn {
     padding: 3px 6px; 
 }
 
 .nav li a {
     padding: 5px 7.5px;
+}
+
+.dropdown-menu li a {
+    font-size: 10px;
+}
+
+.dropdown-menu .divider {
+    margin: 5px 0px;
 }

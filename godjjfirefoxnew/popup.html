@@ -17,7 +17,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12" style="background-color: black;">
-                <img class="center-block" style="width: 300px;" src="https://static-cdn.jtvnw.net/jtv_user_pictures/a717b7d2-9e5b-40c0-bde1-edca2d54498a-profile_banner-480.png">
+                <img class="center-block" style="width: 350px;" src="https://static-cdn.jtvnw.net/jtv_user_pictures/a717b7d2-9e5b-40c0-bde1-edca2d54498a-profile_banner-480.png">
             </div>
         </div>
         <div class="row">
@@ -30,8 +30,6 @@
                     </button>
                     <ul class="dropdown-menu dropdown-menu-right">
                         <li><a id="LoLTWbutton"><b> LOL戰績網(LoL TW) </b></a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a id="LoLCNbutton"><b> 峽谷之巔官網(LoL CN) </b></a></li>
                         <li role="separator" class="divider"></li>
                         <li><a id="LoLbutton"><b> OPGG(LoL KR) </b></a></li>
                     </ul>
@@ -48,6 +46,8 @@
                         <li><a id="MEJJbutton"><b> ME官網JJ介紹 </b></a></li>
                         <li role="separator" class="divider"></li>
                         <li><a id="JGamersbutton"><b> J群玩家 YT </b></a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a id="Godjjmebutton"><b> GODJJ的小港王國 </b></a></li>
                     </ul>
                 </div>
             </div>
@@ -62,11 +62,11 @@
                 </a>
             </div>
         </div>
-        <div class="row" style="display: none;">
+        <div class="row">
             <div class="btn-group btn-group-justified" role="group" aria-label="...">
                 <a id="Newsbutton" class="btn btn-default">
                     <span id="newsbadge" class="badge" style="background-color: #F9BF45; margin-right: 10px;">JJ News</span>
-                    <marquee id="newsMarquee" behavior="alternate" style="width: 200px;"><b id="news"></b></marquee>
+                    <marquee id="newsMarquee" style="margin-bottom: -5px; width: 250px;"><b id="news"></b></marquee>
                 </a>
             </div>
         </div>
@@ -101,26 +101,6 @@
                                 <td id="LoL_WinRatio" class="text-center">讀取中</td>
                             </tr>
                             <tr>
-                                <th colspan="5" class="history text-center">
-                                    <span class="badge" style="background-color: red; margin-right: 10px;">CN</span>
-                                    <b id="LoL_NameCN">讀取中</b>
-                                </th>
-                            </tr>
-                            <tr>
-                                <th class="history text-center">牌位</th>
-                                <th class="history text-center">分數</th>
-                                <th class="history text-center">勝</th>
-                                <th class="history text-center">敗</th>
-                                <th class="history text-center">勝率</th>
-                            </tr>
-                            <tr>
-                                <td id="LoL_tierRankCN" class="text-center">讀取中</td>
-                                <td id="LoL_LeaguePointsCN" class="text-center">讀取中</td>
-                                <td id="LoL_WinCN" class="text-center">讀取中</td>
-                                <td id="LoL_LossCN" class="text-center">讀取中</td>
-                                <td id="LoL_WinRatioCN" class="text-center">讀取中</td>
-                            </tr>
-                            <tr>
                                 <th colspan="5" class="text-center">
                                     <span class="badge" style="background-color: green; margin-right: 10px;">TW</span>
                                     <b id="LoL_NameTW">讀取中</b>
@@ -144,8 +124,12 @@
                     </table>
                 </div>
                 <div role="tabpanel" class="tab-pane fade" id="last10Games">
-                    <canvas id="KR_LOL_Last_10_Games" style="padding: 0px 5px 5px;"></canvas>
-                    <canvas id="TW_LOL_Last_10_Games" style="padding: 0px 5px 5px;"></canvas>
+                    <div style="height: 125px">
+                        <canvas id="KR_LOL_Last_10_Games" style="padding: 0px 5px 5px;"></canvas>
+                    </div>
+                    <div style="height: 125px">
+                        <canvas id="TW_LOL_Last_10_Games" style="padding: 0px 5px 5px;"></canvas>
+                    </div>
                 </div>
                 <div role="tabpanel" class="tab-pane fade" id="message">
                     <table class="table table-striped" style="margin-bottom: 0px;"> 

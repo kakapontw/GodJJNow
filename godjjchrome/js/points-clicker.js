@@ -1,26 +1,64 @@
 function clickPointsButton() {
-	try {
-        // points_str => 123,123, we need to parse str to int for calculate clicked points
-        var old_points_str = document.getElementsByClassName('community-points-summary')[0].children[0].children[1].children[0].children[0].children[0].children[0].children[1].children[0].textContent;
-        var old_points = parseInt(old_points_str.replace(/,/g, ''));
-
-        // click button!
-        document.querySelector('.community-points-summary').querySelector('button.tw-button').click();
-
-        // wait some time for value update
-        setTimeout(function(old_points) {
-            var new_points_str = document.getElementsByClassName('community-points-summary')[0].children[0].children[1].children[0].children[0].children[0].children[0].children[1].children[0].textContent;
-            var new_points = parseInt(new_points_str.replace(/,/g, ''));
-            var clicked_points = new_points - old_points;
-            
-            console.log('Get GodJJ points: '+ clicked_points + ' [' + old_points + ' -> ' + new_points + '], Time: ' + new Date());
-        }, 3000, old_points);
+    try {
+        // Get all clickable buttons and click button!
+        var elems = document.querySelector('.community-points-summary').querySelectorAll('button');
+        elems.forEach(function(currentElem, index, arr) {
+            if (index != 0) {
+                currentElem.click();
+                console.log('Clicked points button!, Time: ' + new Date());
+            }
+        });
     }
     catch(err) {}
 }
 
-// Initialized check
-clickPointsButton();
+// Retry 6 times, total try 1 min (6 * 10s(setTimeout))
+const RETRY_NUM = 6;
 
-// Register button arrive
-document.arrive('.tw-button', clickPointsButton);
+function initialize(retry) {
+    // Initialized check
+    function check() {
+        var promise = new Promise(function(resolve, reject) {
+            setTimeout(function() {
+                console.log('Initialized!');
+                Arrive.unbindAllArrive();
+            
+                if (document.body.contains(document.getElementsByClassName('community-points-summary')[0])) {
+                    console.log('In channel page');
+                    // Pre-click
+                    clickPointsButton();
+                    // Register button arrive
+                    document.getElementsByClassName('community-points-summary').arrive('button', clickPointsButton);
+                    // In channel page, no need to retry
+                    retry = RETRY_NUM
+                    resolve(retry);
+                }
+                else {
+                    retry += 1
+                    resolve(retry);
+                }
+            }, 10000);
+        });
+        return promise;
+    }
+     
+    check().then(function(retry_message) {
+        if (retry_message < RETRY_NUM){
+            // Retry initialize, because sometimes the page load will be delayed
+            console.log('retry ', retry_message);
+            initialize(retry_message)
+        }
+    });
+}
+
+// Pre-initialize
+initialize(0)
+
+// Message from background.js
+chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
+    if ('onHistoryStateUpdated' in msg) {
+        initialize(0)
+        sendResponse({onHistoryStateUpdated: 'ok'})
+        console.log("onHistoryStateUpdated");
+    }
+});

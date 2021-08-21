@@ -1,20 +1,23 @@
 ﻿document.addEventListener('DOMContentLoaded', function(dcle) {
-    var buttonName = ["FBbutton", "Youtubebutton", "LoLTWbutton", "LoLbutton", 
-        "Musicbutton", "Music2button", "MEJJbutton", "JGamersbutton", "Godjjmebutton", "Twitchbutton"];
-    var buttonUrl = ["https://www.facebook.com/GodJJLOL", "https://www.youtube.com/channel/UCt--8DKolHNzogSofX35fRQ", 
-        "https://lol.moa.tw/summoner/show/alimamado", "https://www.op.gg/summoner/userName=TWITCHGODJJ",
-        "https://www.youtube.com/playlist?list=PLicQ4e8xsEiH3AnRUFkkwJVaHHvLi-ylL",
-        "https://www.youtube.com/playlist?list=PLBGxXkqJe9DSoclWSk6idRDyTYtmWxlcw", 
-        "http://www.ment.com.tw/zh-tw/artist_info.php?id=14", 
-        "https://www.youtube.com/channel/UCNAmbRgIsM8xKDJR47sLYAw", "https://godjj.me","https://www.twitch.tv/godjj"
-    ];
-    for (var i = 0; i < buttonName.length; i++) {
-        var button = document.getElementById(buttonName[i]);
-        button.setAttribute("data-content", buttonUrl[i]);
+    var buttonMap=new Map();
+    buttonMap.set("FBbutton", "https://www.facebook.com/GodJJLOL");
+    buttonMap.set("Youtubebutton", "https://www.youtube.com/channel/UCt--8DKolHNzogSofX35fRQ");
+    buttonMap.set("LoLTWbutton", "https://lol.moa.tw/summoner/show/alimamado");
+    buttonMap.set("LoLbutton", "https://www.op.gg/summoner/userName=TWITCHGODJJ");
+    buttonMap.set("Musicbutton", "https://www.youtube.com/playlist?list=PLicQ4e8xsEiH3AnRUFkkwJVaHHvLi-ylL");
+    buttonMap.set("Music2button", "https://www.youtube.com/playlist?list=PLBGxXkqJe9DSoclWSk6idRDyTYtmWxlcw");
+    buttonMap.set("MEJJbutton", "http://www.ment.com.tw/zh-tw/artist_info.php?id=14");
+    buttonMap.set("JGamersbutton", "https://www.youtube.com/channel/UCNAmbRgIsM8xKDJR47sLYAw");
+    buttonMap.set("Godjjmebutton", "https://godjj.me");
+    buttonMap.set("Twitchbutton", "https://www.twitch.tv/godjj");
+    buttonMap.forEach((buttonUrl, buttonName)=>{
+        var button = document.getElementById(buttonName);
+        button.setAttribute("data-content", buttonUrl);
         button.addEventListener('click', function(ce) {
             browser.tabs.create({ "url": this.getAttribute("data-content") });
         });
-    }
+    });
+
     var Newsmarquee = document.getElementById("newsMarquee");
     Newsmarquee.stop();
 });
@@ -190,92 +193,37 @@ function getYMdiff(now, dateString) {
     }
 }
 
-var twitchinfo = new XMLHttpRequest();
-twitchinfo.open("GET", "https://api.twitch.tv/kraken/channels/11561802", true);
-twitchinfo.onreadystatechange = function() {
-    if (twitchinfo.readyState == 4) {
-        var obj = JSON.parse(twitchinfo.responseText);
-        //jjinfo       
-        document.getElementById("Twitch_Name").innerText = obj.display_name + "(" + obj.name + ")";
-        document.getElementById("Twitch_Views").innerText = obj.views;
-        document.getElementById("Twitch_Followers").innerText =  obj.followers;
-        var CreatedTime = moment.tz(obj.created_at, "Asia/Taipei").format('YYYY/MM/DD');
-        document.getElementById("Twitch_Created").innerText = CreatedTime+" "+ getYMdiff(moment(),moment.tz(obj.created_at,"Asia/Taipei")) ;
-    }
-}
-twitchinfo.setRequestHeader("Accept", "application/vnd.twitchtv.v5+json");
-twitchinfo.setRequestHeader("Client-ID", "630so911da4xpdikvv92t5nrke4h96");
-//twitchinfo.send();
-
-var teamsinfo = new XMLHttpRequest();
-teamsinfo.open("GET", "https://api.twitch.tv/kraken/channels/11561802/teams", true);
-teamsinfo.onreadystatechange = function() {
-    if (teamsinfo.readyState == 4) {
-        var obj = JSON.parse(teamsinfo.responseText);
-        var link = document.createElement("a");
-        link.href = "https://www.twitch.tv/team/" + obj.teams[0].name;
-        link.innerText = obj.teams[0].display_name + "(" + obj.teams[0].name + ")";
-        link.onclick = function() { browser.tabs.create({ "url": clearString(this.href) }) };
-        //jjinfo
-        document.getElementById("Twitch_Teams").innerText = "";
-        document.getElementById("Twitch_Teams").appendChild(link);
-    }
-}
-teamsinfo.setRequestHeader("Accept", "application/vnd.twitchtv.v5+json");
-teamsinfo.setRequestHeader("Client-ID", "630so911da4xpdikvv92t5nrke4h96");
-//teamsinfo.send();
-
-var videoinfo = new XMLHttpRequest();
-videoinfo.open("GET", "https://api.twitch.tv/kraken/channels/11561802/videos?broadcast_type=archive", true);
-videoinfo.onreadystatechange = function() {
-    if (videoinfo.readyState == 4) {
-        var obj = JSON.parse(videoinfo.responseText);
-        var link = document.createElement("a");
-        var title = obj.videos[0].title;
-        link.href = obj.videos[0].url;
-        if (title.length > 13) {
-            link.innerText = title.substring(0, 13) + "...";
-        } else {
-            link.innerText = title;
-        }
-        link.onclick = function() { browser.tabs.create({ "url": clearString(this.href) }) };
-        link.setAttribute("title", obj.videos[0].title);
-        //jjinfo
-        document.getElementById("Twitch_Updated").innerText = "";
-        document.getElementById("Twitch_Updated").appendChild(link);
-    }
-}
-videoinfo.setRequestHeader("Accept", "application/vnd.twitchtv.v5+json");
-videoinfo.setRequestHeader("Client-ID", "630so911da4xpdikvv92t5nrke4h96");
-// videoinfo.send();
-
-
-
 var liveinfo = new XMLHttpRequest();
-liveinfo.open("GET", "https://api.twitch.tv/kraken/streams/11561802", true);
+liveinfo.open("GET", "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ5YhoeZYKzorLHn_YcmqMSPAZ3dZNM7Z5JYSRq9xlpNJr5eESDDrUwoyUgZeOJygGE1qflE2h9PY84/pub?gid=0&single=true&output=csv", true);
 liveinfo.onreadystatechange = function() {
     if (liveinfo.readyState == 4) {
-        var obj = JSON.parse(liveinfo.responseText);
-        if (obj.stream != null) {
-            document.getElementById("twitchbadge").innerText = "Live";
-            document.getElementById("twitchbadge2").innerText = obj.stream.game;
+        var csvData = Papa.parse(liveinfo.responseText)['data'];
+        if (csvData != null) {
+            csvData.forEach(function(data){
+                var userId = data[0];
+                var openStr = data[1];
+                var gameName = data[2];
+                var title = data[3];
+
+                if (userId == 'GodJJ' && openStr == 'Open') {
+                    document.getElementById("twitchbadge").innerText = "Live";
+                    document.getElementById("twitchbadge2").innerText = gameName;
+                }
+            });
         }
     }
 }
-liveinfo.setRequestHeader("Accept", "application/vnd.twitchtv.v5+json");
-liveinfo.setRequestHeader("Client-ID", "630so911da4xpdikvv92t5nrke4h96");
 liveinfo.send();
 
 var newsinfo = new XMLHttpRequest();
-newsinfo.open("GET", "https://spreadsheets.google.com/feeds/list/1iPm4hNA_v9Rc76TGCwNpXB5bVTfhORhGzxMYvLiLhQo/1/public/values?alt=json", true);
+newsinfo.open("GET", "https://docs.google.com/spreadsheets/d/e/2PACX-1vT6GqbrusdF8t250d2AQNCHvwr5VANEIk3-ehToq409u07LRGMUK8ssgkVlqWY4q1cvIUUTAPBWVxq2/pub?gid=1520080953&single=true&output=csv", true);
 newsinfo.onreadystatechange = function() {
     if (newsinfo.readyState == 4) {
-        var obj = JSON.parse(newsinfo.responseText);
-        if (obj != null) {
-            var dataArr = obj.feed.entry;
-            var datalength = dataArr.length;
-            var news = dataArr[datalength - 1].gsx$新聞內容.$t;
-            var newslink = dataArr[datalength - 1].gsx$相關網址.$t;
+        var csvData = Papa.parse(newsinfo.responseText)['data'];
+        if (csvData != null) {
+            var dataLength = csvData.length;
+            var news = csvData[dataLength - 1][1];
+            var newslink = csvData[dataLength - 1][2];
             document.getElementById("news").innerText = news;
             var Newsmarquee = document.getElementById("newsMarquee");
             Newsmarquee.setAttribute("behavior", "");

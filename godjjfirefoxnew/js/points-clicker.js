@@ -55,7 +55,7 @@ function initialize(retry) {
 initialize(0)
 
 // Message from background.js
-chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
+browser.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
     if ('onHistoryStateUpdated' in msg) {
         initialize(0)
         sendResponse({onHistoryStateUpdated: 'ok'})

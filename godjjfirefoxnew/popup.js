@@ -328,7 +328,7 @@ function transferFailed(evt) {
     var link = document.createElement("a");
     link.href = "";
     link.innerText = "由於短期間按太多次 要去戰績網解鎖";
-    link.onclick = function() { chrome.tabs.create({ "url": "https://lol.moa.tw/recaptcha/challenge" }) };
+    link.onclick = function() { browser.tabs.create({ "url": "https://lol.moa.tw/recaptcha/challenge" }) };
 
     document.getElementById("last10Games").appendChild(link);
     document.getElementById("TW_LOL_Last_10_Games").style.visibility = "hidden";

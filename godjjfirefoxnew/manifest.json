@@ -1,19 +1,17 @@
 {
     "manifest_version": 2,
-    "name": "GodJJ Now",
+    "name": "GodJJ Now for Firefox",
     "description": "是一款真正的JJ套件",
-    "version": "2.2.1",
+    "version": "2.3.0",
     "permissions": [
         "alarms",
         "storage",
         "notifications",
         "webNavigation",
         "*://*.twitch.tv/*",
-        "https://www.op.gg/",
-        "http://www.op.gg/",
-        "https://tw.op.gg/",
-        "http://tw.op.gg/",
-        "https://lol.moa.tw/"
+        "*://*.op.gg/",
+        "https://lol.moa.tw/",
+        "https://docs.google.com/"
     ],
     "options_ui":
     {
@@ -47,8 +45,8 @@
     {
         "gecko":
         {
-            "id": "kakapon.tw@gmail.com",
-            "strict_min_version": "48.0"
+            "id": "kakapon.tw@outlook.com",
+            "strict_min_version": "50.0"
         }
     }
 }

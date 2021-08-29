@@ -9,7 +9,7 @@
 
 ### 線上版本：
 - [Chrome版本](https://chrome.google.com/webstore/detail/godjj-now/blinlknnpdpmchjdimpiiinbamgbnbmd)
-- [Firefox版本](https://addons.mozilla.org/en-US/firefox/addon/godjj-now/)
+- [Firefox版本](https://addons.mozilla.org/zh-TW/firefox/addon/godjj-now-for-firefox/)
 - [~~舊Firefox版本~~ (帳號二階段驗證過不了, 請安裝上面新版)](https://addons.mozilla.org/en-US/firefox/addon/godjj-now/)
 - [GitHub](https://github.com/kakapontw/GodJJNow)
 

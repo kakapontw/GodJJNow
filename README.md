@@ -1,11 +1,16 @@
 # GodJJNow 
-[![Chrome Web Store](https://img.shields.io/chrome-web-store/v/blinlknnpdpmchjdimpiiinbamgbnbmd.svg)](https://chrome.google.com/webstore/detail/godjj-now/blinlknnpdpmchjdimpiiinbamgbnbmd?hl=zh-TW) [![Chrome Web Store](https://img.shields.io/chrome-web-store/users/blinlknnpdpmchjdimpiiinbamgbnbmd.svg)]() [![Chrome Web Store](https://img.shields.io/chrome-web-store/stars/blinlknnpdpmchjdimpiiinbamgbnbmd.svg)]() [![Mozilla Add-on](https://img.shields.io/amo/v/godjj-now.svg)](https://addons.mozilla.org/en-US/firefox/addon/godjj-now/)
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/v/blinlknnpdpmchjdimpiiinbamgbnbmd)](https://chrome.google.com/webstore/detail/godjj-now/blinlknnpdpmchjdimpiiinbamgbnbmd?hl=zh-TW) 
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/users/blinlknnpdpmchjdimpiiinbamgbnbmd)]() 
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/stars/blinlknnpdpmchjdimpiiinbamgbnbmd?label=chrome%20web%20store)]() 
+[![Mozilla Add-on](https://img.shields.io/amo/v/godjj-now-for-firefox)](https://addons.mozilla.org/zh-TW/firefox/addon/godjj-now-for-firefox/)
+
 
 方便大家及時了解GodJJ各項資訊
 
 ### 線上版本：
 - [Chrome版本](https://chrome.google.com/webstore/detail/godjj-now/blinlknnpdpmchjdimpiiinbamgbnbmd)
 - [Firefox版本](https://addons.mozilla.org/en-US/firefox/addon/godjj-now/)
+- [~~舊Firefox版本~~ (帳號二階段驗證過不了, 請安裝上面新版)](https://addons.mozilla.org/en-US/firefox/addon/godjj-now/)
 - [GitHub](https://github.com/kakapontw/GodJJNow)
 
 ### 目前包含：
@@ -28,12 +33,23 @@
 * [Moment.js](https://momentjs.com/)
 * [tmi.js](https://www.tmijs.org/)
 * [arrive.js](https://github.com/uzairfarooq/arrive)
+* [Papa Parse](https://www.papaparse.com/)
 
 * JJ台相關圖片已取得使用許可
 * Rank&Link icon made by Freepik from www.flaticon.com, licensed under CC BY 3.0
 * Notification icon made by Darius Dan from www.flaticon.com, licensed under CC BY 3.0
 
 ### 更新資訊：
+<h4>2.3.0</h4>
+<p><strong>更新資料來源＆取得資料的方式，來因應以下變更</strong></p>
+<p><strong>1. 舊版 Twitch API v5 已棄用，並計劃於 2022/02/28 停用</strong></p>
+<p><strong>2. 舊版 Google Sheet API 2021/08/15 已停用(突然就不能用)</strong></p>
+<p></p>
+<p><strong>順帶一題，最近不論是瀏覽器套件本身或很多資源都在變更使用方式</strong></p>
+<p><strong>要用免費又沒有資安疑慮的方式提供服務越來越難</strong></p>
+<p><strong>之後有些功能找不到好方法避開限制可能就會要停掉了</strong></p>
+<p><strong>畢竟這套件也已經要四年半了(原來也那麼久了)</strong></p>
+<hr>
 <h4>2.2.0</h4>
 <p><strong>修正無法自動點擊"國王的金幣"額外獎勵的問題</strong></p>
 <p><strong>並將點金幣功能，延伸至全部Twitch實況都會啟動</strong></p>

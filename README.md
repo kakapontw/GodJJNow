@@ -40,6 +40,10 @@
 * Notification icon made by Darius Dan from www.flaticon.com, licensed under CC BY 3.0
 
 ### 更新資訊：
+<h4>2.3.1</h4>
+<p><strong>開台通知恢復成又快又準不亂叫的舊版方式</strong></p>
+<p><strong>收到吊飾有動力更新了！ 明年2/28 API停用後就在看情況吧</strong></p>
+<hr>
 <h4>2.3.0</h4>
 <p><strong>更新資料來源＆取得資料的方式，來因應以下變更</strong></p>
 <p><strong>1. 舊版 Twitch API v5 已棄用，並計劃於 2022/02/28 停用</strong></p>

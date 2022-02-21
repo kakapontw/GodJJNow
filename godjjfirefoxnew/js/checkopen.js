@@ -20,7 +20,7 @@ browser.storage.local.get({
         browser.alarms.create('openAlarm', alarmInfo);
         notificationPoint = 1;
         // browser.browserAction.setBadgeText({ text: "" });
-        browser.browserAction.setIcon({path: "/img/sleep.png"});
+        browser.browserAction.setIcon({path: "/img/jrobot.png"});
         browser.storage.local.set({ "OpenNotification": false });
         setTimeout(function() { checkOpen(); }, 2000);
     }
@@ -35,7 +35,7 @@ browser.storage.onChanged.addListener(function(changes, areaName) {
             checkOpen();
         } else {
             // browser.browserAction.setBadgeText({ text: "" });
-            browser.browserAction.setIcon({path: "/img/sleep.png"});
+            browser.browserAction.setIcon({path: "/img/jrobot.png"});
             browser.alarms.clearAll();
         }
     } else if (changes.OpenNotification) {
@@ -66,7 +66,7 @@ function checkOpen() {
                     count--;
                 }
                 // browser.browserAction.setBadgeText({ text: "" });
-                browser.browserAction.setIcon({path: "/img/sleep.png"});
+                browser.browserAction.setIcon({path: "/img/jrobot.png"});
                 browser.storage.local.set({ "OpenNotification": false });
             }
         }

@@ -2,7 +2,7 @@
     "manifest_version": 2,
     "name": "GodJJ Now for Firefox",
     "description": "是一款真正的JJ套件",
-    "version": "2.3.1",
+    "version": "2.3.2",
     "permissions": [
         "alarms",
         "storage",
@@ -32,7 +32,7 @@
     {
         "default_area": "navbar",
         "default_title": "點我查詢GodJJ",
-        "default_icon": "/img/sleep.png",
+        "default_icon": "/img/jrobot.png",
         "default_popup": "popup.html"
     },
     "icons":

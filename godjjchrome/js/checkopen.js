@@ -18,7 +18,7 @@ chrome.storage.sync.get({
         chrome.alarms.create('openAlarm', alarmInfo);
         notificationPoint = 1;
         // chrome.browserAction.setBadgeText({ text: "" });
-        chrome.browserAction.setIcon({path: "/img/sleep.png"});
+        chrome.browserAction.setIcon({path: "/img/jrobot.png"});
         chrome.storage.local.set({ "OpenNotification": false }, function() {});
         setTimeout(function() { checkOpen(); }, 2000);
     }
@@ -33,7 +33,7 @@ chrome.storage.onChanged.addListener(function(changes, areaName) {
             checkOpen();
         } else {
             // chrome.browserAction.setBadgeText({ text: "" });
-            chrome.browserAction.setIcon({path: "/img/sleep.png"});
+            chrome.browserAction.setIcon({path: "/img/jrobot.png"});
             chrome.alarms.clearAll();
         }
     } else if (changes.OpenNotification) {
@@ -58,7 +58,7 @@ function checkOpen() {
                 chrome.storage.local.set({ "OpenNotification": true }, function() {});
             } else {
                 // chrome.browserAction.setBadgeText({ text: "" });
-                chrome.browserAction.setIcon({path: "/img/sleep.png"});
+                chrome.browserAction.setIcon({path: "/img/jrobot.png"});
                 chrome.storage.local.set({ "OpenNotification": false }, function() {});
             }
         }

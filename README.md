@@ -16,7 +16,7 @@
 ### 目前包含：
 - Facebook、Youtube、歌單等等相關資訊連結
 - LoL戰績摘要
-- 圖奇開台通知(含GodJJ鈴聲)
+- ~~圖奇開台通知(含GodJJ鈴聲)~~ (2.3.2版移除此功能)
 - JJ聊天室資訊
 - 自動點擊"國王的金幣"額外獎勵
 
@@ -40,6 +40,18 @@
 * Notification icon made by Darius Dan from www.flaticon.com, licensed under CC BY 3.0
 
 ### 更新資訊：
+<h4>2.3.2</h4>
+<p><strong>1. 終止開台通知服務，因 Twitch API v5 將於 2022/02/28 停用</strong></p>
+<p><strong>2. 由於套件沒有開台通知，更換套件圖示為JJ機器人</strong></p>
+<p><strong>3. 更新opgg api，讓韓服最新十場的數據可以畫出來</strong></p>
+<br>
+<p><strong>開台通知先前嘗試的新方法，有人反應很慢才會通知且會亂叫</strong></p>
+<p><strong>而目前找不到其他好方法避開新api的限制，功能就忍痛先移除囉</strong></p>
+<p><strong>之後有時間再來研究看看其他方法，但別抱太大期待QQ</strong></p>
+<br>
+<p><strong>另外之前有做Line群組開台通知，是用另外方式做的，功能依舊</strong></p>
+<p><strong>不過加群組會露出Line的使用名稱，可接受並且想加入的再找我</strong></p>
+<hr>
 <h4>2.3.1</h4>
 <p><strong>開台通知恢復成又快又準不亂叫的舊版方式</strong></p>
 <p><strong>收到吊飾有動力更新了！ 明年2/28 API停用後就在看情況吧</strong></p>
@@ -48,7 +60,7 @@
 <p><strong>更新資料來源＆取得資料的方式，來因應以下變更</strong></p>
 <p><strong>1. 舊版 Twitch API v5 已棄用，並計劃於 2022/02/28 停用</strong></p>
 <p><strong>2. 舊版 Google Sheet API 2021/08/15 已停用(突然就不能用)</strong></p>
-<p></p>
+<br>
 <p><strong>順帶一題，最近不論是瀏覽器套件本身或很多資源都在變更使用方式</strong></p>
 <p><strong>要用免費又沒有資安疑慮的方式提供服務越來越難</strong></p>
 <p><strong>之後有些功能找不到好方法避開限制可能就會要停掉了</strong></p>
@@ -58,7 +70,7 @@
 <p><strong>修正無法自動點擊"國王的金幣"額外獎勵的問題</strong></p>
 <p><strong>並將點金幣功能，延伸至全部Twitch實況都會啟動</strong></p>
 <p><strong>這代表J群以及其他台的額外獎勵寶箱也會自動點囉</strong></p>
-<p></p>
+<br>
 <p><strong>另外有的小變更</strong></p>
 <p><strong>1. 移除峽谷之巔資訊，現在都只打韓服了(台服有時會用)</strong></p>
 <p><strong>2. 重啟News功能，最近活動比較多，可以幫忙公告一些事情</strong></p>

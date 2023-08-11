@@ -249,41 +249,59 @@ function clearString(s) {
     return rs;
 }
 
-var lastteninfo = new XMLHttpRequest();
-lastteninfo.open("GET", "https://www.op.gg/summoner/matches/ajax/averageAndList/startInfo=0&summonerId=83588455&type=total", true);
-lastteninfo.onreadystatechange = function() {
-    if (lastteninfo.readyState == 4) {
-        var obj = JSON.parse(lastteninfo.responseText);
-        var date = [];
-        var winOrlose = [];
-        var kda = [];
-        var temparr = obj.html.split("data-interval='60'>");
-        var tempResultarr = obj.html.split("<div class=\"GameItem ");
-        for (var i = 1; i < 11; i++) {
-            var Seoul = moment.tz(temparr[i].split("</span>")[0], "Asia/Seoul");
-            var Taipei = Seoul.clone().tz("Asia/Taipei");
-            var heroName = temparr[i].split("<a href=\"\/champion\/")[1].split("\/")[0];
-            date[i - 1] = Taipei.format('MMMM Do, HH:mm');
-            if (temparr[i].indexOf("Perfect") > -1) {
-                kda[i - 1] = Number(temparr[i].split("<span class=\"Kill\">")[1].split("<\/span>")[0]) + Number(temparr[i].split("<span class=\"Assist\">")[1].split("<\/span>")[0]);
-                date[i - 1] = [date[i - 1], "(Perfect KDA) " + heroName];
+var lastteninfoKR = new XMLHttpRequest();
+lastteninfoKR.open("GET", "https://www.op.gg/api/games/kr/summoners/eOA_tXi69zrauKJNAmY29EaR9pvtljDnS9dhnK5zm8bZ4OM?hl=zh_TW&game_type=TOTAL", true);
+lastteninfoKR.onreadystatechange = function() {
+    var date = [];
+    var winOrlose = [];
+    var kda = [];
+    if (lastteninfoKR.readyState == 4) {
+        var obj = JSON.parse(lastteninfoKR.responseText);
+        var datas = obj.data;
+        for (var i = 0; i < 10; i++) {
+            date[i] = moment.tz(datas[i].created_at, "Asia/Seoul").clone().tz("Asia/Taipei").format('MMMM Do, HH:mm');
+            var temp_data = datas[i].myData
+
+            var heroName = krchampionsMap.get(temp_data.champion_id);
+            var kill = temp_data.stats.kill
+            var assist = temp_data.stats.assist
+            var death = temp_data.stats.death
+            if (death < 1) {
+                kda[i] = kill + assist
+                kda[i] = kda[i].toFixed(2);
+                date[i] = [date[i], "(Perfect KDA) " + heroName];
             } else {
-                kda[i - 1] = clearString(temparr[i].split("<span class=\"KDARatio \">")[1].split(":")[0]);
-                date[i - 1] = [date[i - 1], heroName];
+                kda[i] = (kill + assist) / death
+                kda[i] = kda[i].toFixed(2);
+                date[i] = [date[i], heroName];
             }
-            var tempResult = tempResultarr[i].split("\">")[0];
-            if (tempResult.indexOf("Win") > -1) {
-                winOrlose[i - 1] = "Victory";
-            } else if (tempResult.indexOf("Remake") > -1) {
-                winOrlose[i - 1] = "Remake";
+
+            var result = temp_data.stats.result
+            if (result == "WIN") {
+                winOrlose.push("Victory");
+            } else if (result == "LOSE") {
+                winOrlose.push("Defeat");
             } else {
-                winOrlose[i - 1] = "Defeat";
+                winOrlose.push("Remake");
             }
         }
         draw("KR_LOL_Last_10_Games", date.reverse(), winOrlose.reverse(), kda.reverse());
     }
 }
-lastteninfo.send();
+
+var krchampionsMap=new Map();
+championsinfoKR = new XMLHttpRequest();
+championsinfoKR.open("GET", "https://www.op.gg/api/meta/champions?hl=zh_TW", true);
+championsinfoKR.onreadystatechange = function() {
+    if (championsinfoKR.readyState == 4) {
+        krchampionsdatatemp = JSON.parse(championsinfoKR.responseText);
+        for(var index in krchampionsdatatemp.data) {
+            krchampionsMap.set(krchampionsdatatemp.data[index].id, krchampionsdatatemp.data[index].name);
+        }
+        lastteninfoKR.send();
+    }
+}
+championsinfoKR.send();
 
 var lastteninfoTW = new XMLHttpRequest();
 lastteninfoTW.open("GET", "https://lol.moa.tw/Ajax/recentgames/104480608", true);

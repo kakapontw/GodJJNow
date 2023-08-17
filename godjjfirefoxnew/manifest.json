@@ -2,7 +2,7 @@
     "manifest_version": 2,
     "name": "GodJJ Now for Firefox",
     "description": "是一款真正的JJ套件",
-    "version": "2.3.2",
+    "version": "2.3.3",
     "permissions": [
         "alarms",
         "storage",
@@ -10,7 +10,6 @@
         "webNavigation",
         "*://*.twitch.tv/*",
         "*://*.op.gg/",
-        "https://lol.moa.tw/",
         "https://docs.google.com/"
     ],
     "options_ui":

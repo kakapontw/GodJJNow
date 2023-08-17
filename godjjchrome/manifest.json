@@ -10,7 +10,6 @@
         "webNavigation",
         "*://*.twitch.tv/*",
         "*://*.op.gg/",
-        "https://lol.moa.tw/",
         "https://docs.google.com/*"
     ],
     "options_ui":

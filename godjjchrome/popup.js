@@ -1,356 +1,200 @@
-﻿document.addEventListener('DOMContentLoaded', function(dcle) {
-    var buttonMap=new Map();
+﻿document.addEventListener('DOMContentLoaded', function () {
+    var buttonMap = new Map();
     buttonMap.set("FBbutton", "https://www.facebook.com/GodJJLOL");
     buttonMap.set("Youtubebutton", "https://www.youtube.com/channel/UCt--8DKolHNzogSofX35fRQ");
-    buttonMap.set("LoLTWbutton", "https://lol.moa.tw/summoner/show/alimamado");
-    buttonMap.set("LoLbutton", "https://www.op.gg/summoner/userName=TWITCHGODJJ");
+    buttonMap.set("Discordbutton", "https://discord.gg/6JnBwBy");
     buttonMap.set("Musicbutton", "https://www.youtube.com/playlist?list=PLicQ4e8xsEiH3AnRUFkkwJVaHHvLi-ylL");
     buttonMap.set("Music2button", "https://www.youtube.com/playlist?list=PLBGxXkqJe9DSoclWSk6idRDyTYtmWxlcw");
-    buttonMap.set("MEJJbutton", "http://www.ment.com.tw/zh-tw/artist_info.php?id=14");
     buttonMap.set("JGamersbutton", "https://www.youtube.com/channel/UCNAmbRgIsM8xKDJR47sLYAw");
     buttonMap.set("Godjjmebutton", "https://godjj.me");
     buttonMap.set("Twitchbutton", "https://www.twitch.tv/godjj");
-    buttonMap.forEach((buttonUrl, buttonName)=>{
+    buttonMap.forEach((buttonUrl, buttonName) => {
         var button = document.getElementById(buttonName);
         button.setAttribute("data-content", buttonUrl);
-        button.addEventListener('click', function(ce) {
+        button.addEventListener("click", function (ce) {
             chrome.tabs.create({ "url": this.getAttribute("data-content") });
         });
     });
-
-    var Newsmarquee = document.getElementById("newsMarquee");
-    Newsmarquee.stop();
+    // 獲取和設置跑馬燈的內容
+    fetchLatestYoutubeVideo();
 });
-//Message彈出
-$(function() {
-    $('[data-toggle="popover"]').popover()
-})
+
+// 獲取 YouTube 最新影片資訊
+function fetchLatestYoutubeVideo() {
+    const channelId = "UCt--8DKolHNzogSofX35fRQ"; // GodJJ 的 YouTube 實況台 ID
+    const feedUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`;
+
+    // 顯示加載中訊息
+    const newsElement = document.getElementById("news");
+    newsElement.innerText = "正在載入最新影片...";
+
+    // 由於瀏覽器的跨域限制，使用 CORS 代理
+    const corsProxy = "https://corsproxy.io/?url=";
+
+    fetch(corsProxy + feedUrl)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.text();
+        })
+        .then(data => {
+            // 解析 XML
+            const parser = new DOMParser();
+            const xmlDoc = parser.parseFromString(data, "text/xml");
+
+            // 檢查是否有解析錯誤
+            if (xmlDoc.getElementsByTagName("parsererror").length > 0) {
+                throw new Error("XML parsing error");
+            }
+
+            // 獲取最新的影片條目
+            const entries = xmlDoc.getElementsByTagName("entry");
+
+            if (entries.length > 0) {
+                const latestEntry = entries[0];
+                const title = latestEntry.getElementsByTagName("title")[0].textContent;
+                const videoId = latestEntry.getElementsByTagName("yt:videoId")[0].textContent;
+                const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
+
+                // 設置跑馬燈內容
+                newsElement.innerText = title;
+                const newsMarquee = document.getElementById("newsMarquee");
+                newsMarquee.setAttribute("behavior", "scroll");
+
+                // 啟用按鈕點擊開啟影片
+                const Newsbutton = document.getElementById("Newsbutton");
+                // 先移除舊的事件監聽器，避免重複綁定，會導致跑馬燈第一次跑到一半就被重置
+                Newsbutton.replaceWith(Newsbutton.cloneNode(true));
+                Newsbutton.addEventListener("click", function () {
+                    chrome.tabs.create({ "url": videoUrl });
+                });
+            } else {
+                throw new Error("No video entries found");
+            }
+        })
+        .catch(error => {
+            console.error("Error fetching YouTube RSS feed:", error);
+            document.getElementById("news").innerText = "無法載入最新影片";
+        });
+}
 
 chrome.storage.sync.get({
     JJMessage: '{"Message":[]}'
-}, function(items) {
+}, function (items) {
     var messageArr = JSON.parse(items.JJMessage);
     messageArr.Message.reverse();
+    var tbody = document.getElementById("messageTableBody");
+
     for (var i = 0; i < messageArr.Message.length; i++) {
-        var key = Object.keys(messageArr.Message[i]);
-        var value = messageArr.Message[i][key];
-        if (value.indexOf("https://") > -1 || value.indexOf("http://") > -1) {
+        var key = Object.keys(messageArr.Message[i])[0]; // 時間
+        var value = messageArr.Message[i][key]; // 訊息內容或物件
+
+        // 建立一行的元素
+        var tr = document.createElement("tr");
+
+        // 建立編號欄
+        var tdIndex = document.createElement("td");
+        tdIndex.className = "text-center";
+        tdIndex.innerText = (i + 1);
+
+        // 建立時間欄
+        var tdTime = document.createElement("td");
+        tdTime.className = "text-center";
+        tdTime.innerText = key;
+
+        channelInfo = value.channel;
+        streamerInfo = value.streamer;
+        messageContent = value.message;
+
+        // 建立實況台欄
+        var tdChannel = document.createElement("td");
+        tdChannel.className = "text-center";
+        tdChannel.innerHTML = "<span class='badge' style='background-color: #6441A4;'>" + channelInfo + "</span>";
+
+        // 建立實況台主欄
+        var tdStreamer = document.createElement("td");
+        tdStreamer.className = "text-center";
+        tdStreamer.innerText = streamerInfo;
+
+        // 建立訊息欄
+        var tdMsg = document.createElement("td");
+        tdMsg.className = "text-center message-cell";
+        if (messageContent.indexOf("https://") > -1 || messageContent.indexOf("http://") > -1) {
             var link = document.createElement("a");
-            link.href = value;
-            link.innerText = value.substring(0, 30) + " ...";
-            link.onclick = function() { chrome.tabs.create({ "url": clearString(this.href) }) };
-            document.getElementById("time" + (i + 1)).innerText = key;
-            document.getElementById("m" + (i + 1)).appendChild(link);
-        } else if (value.length > 12) {
-            document.getElementById("m" + (i + 1)).setAttribute("data-container", "body");
-            document.getElementById("m" + (i + 1)).setAttribute("data-toggle", "popover");
-            document.getElementById("m" + (i + 1)).setAttribute("data-placement", "top");
-            document.getElementById("m" + (i + 1)).setAttribute("data-trigger", "hover");
-            document.getElementById("m" + (i + 1)).setAttribute("data-content", value);
-            document.getElementById("time" + (i + 1)).innerText = key;
-            document.getElementById("m" + (i + 1)).innerText = value.substring(0, 12) + " ...";
+            link.href = messageContent;
+            link.innerText = messageContent.substring(0, 30) + " ...";
+            link.onclick = function (e) {
+                e.preventDefault();
+                chrome.tabs.create({ "url": this.href });
+            };
+            tdMsg.appendChild(link);
+        } else if (messageContent.length > 12) {
+            // 創建一個用於顯示縮略訊息的元素
+            var shortMsg = document.createElement("span");
+            shortMsg.className = "short-message";
+            shortMsg.innerText = messageContent.substring(0, 12) + " ...";
+
+            // 創建一個用於顯示完整訊息的元素（初始隱藏）
+            var fullMsg = document.createElement("span");
+            fullMsg.className = "full-message";
+            fullMsg.innerText = messageContent;
+            fullMsg.style.display = "none";
+
+            tdMsg.appendChild(shortMsg);
+            tdMsg.appendChild(fullMsg);
+
+            // 同時設置 popover 用於滑鼠 hover 顯示
+            tdMsg.setAttribute("data-container", "body");
+            tdMsg.setAttribute("data-toggle", "popover");
+            tdMsg.setAttribute("data-placement", "top");
+            tdMsg.setAttribute("data-trigger", "hover");
+            tdMsg.setAttribute("data-content", messageContent);
+
+            // 點擊切換顯示完整/縮略訊息
+            tdMsg.addEventListener("click", function (e) {
+                var shortMsg = this.querySelector(".short-message");
+                var fullMsg = this.querySelector(".full-message");
+
+                if (fullMsg.style.display === "none") {
+                    shortMsg.style.display = "none";
+                    fullMsg.style.display = "inline";
+                } else {
+                    shortMsg.style.display = "inline";
+                    fullMsg.style.display = "none";
+                }
+
+                // 防止事件冒泡
+                e.stopPropagation();
+            });
         } else {
-            document.getElementById("time" + (i + 1)).innerText = key;
-            document.getElementById("m" + (i + 1)).innerText = value;
+            tdMsg.innerText = messageContent;
         }
+
+        tr.appendChild(tdIndex);
+        tr.appendChild(tdTime);
+        tr.appendChild(tdChannel);
+        tr.appendChild(tdStreamer);
+        tr.appendChild(tdMsg);
+        tbody.appendChild(tr);
+    }
+
+    //Message彈出
+    $("[data-toggle='popover']").popover();
+});
+
+// 新增全域點擊事件來關閉已展開的訊息
+$(document).on("click", function (e) {
+    if (!$(e.target).closest(".message-cell").length) {
+        $(".short-message").show();
+        $(".full-message").hide();
     }
 });
 
-var lolinfo = new XMLHttpRequest();
-lolinfo.open("GET", "https://www.op.gg/summoner/userName=TWITCHGODJJ", true);
-lolinfo.onreadystatechange = function() {
-    if (lolinfo.readyState == 4) {
-        var tempStr = lolinfo.responseText;
-        var tempArr = tempStr.split("<meta name=\"description\" content=\"")[1].split(">")[0].split("/");
-        document.getElementById("LoL_Name").innerText = tempArr[0];
-        var tierRank = tempArr[1].split(" ");
-        var bostr = "";
-        if (tempStr.match(/SeriesBackground/g)) {
-            var mid = tempStr.split("<div class=\"SeriesBackground\">")[1].split("</div>")[0].split("__spSite __spSite-")[1].split("\"")[0];
-            var boItemArr = tempStr.split("<ol class=\"SeriesResults\">")[1].split("</ol>")[0].split("__spSite __spSite-");
-            var win = 0,
-                loss = 0;
-            for (var i = 1; i < boItemArr.length; i++) {
-                if (mid < boItemArr[i].split("\"")[0]) {
-                    win++;
-                } else {
-                    loss++;
-                }
-            }
-            bostr = "(BO " + win + "W" + loss + "L)";
-        }
-        if (tierRank.length == 5) {
-            document.getElementById("LoL_tierRank").innerText = tierRank[1] + " " + tierRank[2];
-            document.getElementById("LoL_LeaguePoints").innerText = tierRank[3].replace("LP", "") + bostr;
-        } else {
-            document.getElementById("LoL_tierRank").innerText = tierRank[1];
-            document.getElementById("LoL_LeaguePoints").innerText = tierRank[2].replace("LP", "") + bostr;
-        }
-        var WinRatio = tempArr[2].split(" ");
-        document.getElementById("LoL_Win").innerText = WinRatio[1].match(/\d+/);
-        document.getElementById("LoL_Loss").innerText = WinRatio[2].match(/\d+/);
-        document.getElementById("LoL_WinRatio").innerText = WinRatio[WinRatio.length - 2];
-    }
-}
-lolinfo.send();
-
-var tier_dict = {'31':'最强王者','30':'傲世宗师','29':'超凡大师','28':'璀璨钻石','27':'华贵铂金','26':'荣耀黄金','25':'不屈白银','24':'英勇黄铜','23':'坚韧黑铁'};
-var rank_dict = {'0':'I','1':'II','2':'III','3':'IIII'};
-var lolinfoCN = new XMLHttpRequest();
-lolinfoCN.open("GET", "https://lol.sw.game.qq.com/lol/commact/?proj=TopCanyon&c=ActionUser&a=UserRankList&e_num=25&Page=1&SearchName=GODJJ", true);
-lolinfoCN.onreadystatechange = function() {
-    if (lolinfoCN.readyState == 4) {
-        var tempStr = lolinfoCN.responseText;
-        var dataArr = JSON.parse(tempStr.split(" = ")[1]);
-        document.getElementById("LoL_NameCN").innerText = dataArr.list[0].name;
-
-        var check_list = ["31", "30", "29"]
-        if(check_list.includes(dataArr.list[0].tier)){
-            document.getElementById("LoL_tierRankCN").innerText = tier_dict[dataArr.list[0].tier];
-        } else {
-            document.getElementById("LoL_tierRankCN").innerText = tier_dict[dataArr.list[0].tier] + rank_dict[dataArr.list[0].rank];
-        }
-
-        document.getElementById("LoL_LeaguePointsCN").innerText = dataArr.list[0].league_points;
-        
-        var lolWinCN = parseInt(dataArr.list[0].total_wins);
-        var lolLossTw = parseInt(dataArr.list[0].total_losses) + parseInt(dataArr.list[0].total_leaves);
-        var lolWinRatioTw = Math.round((lolWinCN*100/(lolWinCN+lolLossTw))) + '%';
-
-        document.getElementById("LoL_WinCN").innerText = dataArr.list[0].total_wins;
-        document.getElementById("LoL_LossCN").innerText = parseInt(dataArr.list[0].total_losses) + parseInt(dataArr.list[0].total_leaves);
-        document.getElementById("LoL_WinRatioCN").innerText = lolWinRatioTw;
-    }
-}
-// lolinfoCN.send();
-
-var lolinfoTW = new XMLHttpRequest();
-lolinfoTW.open("GET", "https://lol.moa.tw/Ajax/rankeddashboard/7513983/RANKED_SOLO_5x5", true);
-lolinfoTW.onreadystatechange = function() {
-    if (lolinfoTW.readyState == 4) {
-        var tempStr = lolinfoTW.responseText;
-        document.getElementById("LoL_NameTW").innerText = "alimamado";
-        try {
-            var tierRank = tempStr.split("<td id=\"league_tier\">")[1].split("<")[0];
-            var tierRank2 = tempStr.split("<td id=\"league_rank\">")[1].split("</td>")[0];
-            var bostr = "";
-            var botempStr = tempStr.split("alimamado</a></td>")[1].split("<td class=\"text-center strong\">")[2].split("</td>")[0];
-            if (botempStr.match(/icon-minus/g)) {
-                var win = 0,
-                    loss = 0;
-                if (botempStr.match(/icon-ok/g)) {
-                    win = botempStr.match(/icon-ok/g).length;
-                }
-                if (botempStr.match(/icon-remove/g)) {
-                    loss = botempStr.match(/icon-remove/g).length;
-                }
-                bostr = "BO " + win + "W" + loss + "L";
-            } else {
-                bostr = tempStr.split("alimamado</a></td>")[1].split("<td class=\"text-center strong\">")[2].split("</td>")[0];
-            }
-
-            if(tierRank2.indexOf("NA") > -1){
-                document.getElementById("LoL_tierRankTW").innerText = tierRank
-            }else{
-                document.getElementById("LoL_tierRankTW").innerText = tierRank + " " + tierRank2;
-            }
-
-            var lolWinTw = tempStr.split("alimamado</a></td>")[1].split("<td class=\"text-center strong\">")[1].split("</td>")[0];
-            var lolLossTw = tempStr.split("alimamado</a></td>")[1].split("<td class=\"hide text-center strong\">")[1].split("</td>")[0];
-            var lolWinRatioTw = tempStr.split("alimamado</a></td>")[1].split("<td class=\"hide text-center strong\">")[2].split("</td>")[0];
-            document.getElementById("LoL_LeaguePointsTW").innerText = bostr;
-            document.getElementById("LoL_WinTW").innerText = lolWinTw;
-            document.getElementById("LoL_LossTW").innerText = lolLossTw;
-            document.getElementById("LoL_WinRatioTW").innerText = lolWinRatioTw;
-        } catch (error) {
-            console.log(error)
-        }
-    }
-}
-lolinfoTW.send();
-
-function getYMdiff(now, dateString) {
-
-    var age = now.get('year') - dateString.get('year');
-    var m = now.get('month') - dateString.get('month');
-    if (m < 0 || (m === 0 && now.get('date') < dateString.get('date'))) {
-        age--;
-    }
-
-    var months = (age * 12) - (dateString.get('month') + 1) + (now.get('month') + 1);
-    if (now.get('date') < dateString.get('date')) {
-        months -= 1;
-    }
-
-    months = months % 12;
-
-    if (months < 0) {
-        months += 12;
-    }
-
-    if (months == 0) {
-        return "(" + age + "年" + ")";
-    } else if (age == 0) {
-        return "(" + months + "個月" + ")";
-    } else {
-        return "(" + age + "年" + months + "個月" + ")";
-    }
-}
-
-var liveinfo = new XMLHttpRequest();
-liveinfo.open("GET", "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ5YhoeZYKzorLHn_YcmqMSPAZ3dZNM7Z5JYSRq9xlpNJr5eESDDrUwoyUgZeOJygGE1qflE2h9PY84/pub?gid=0&single=true&output=csv", true);
-liveinfo.onreadystatechange = function() {
-    if (liveinfo.readyState == 4) {
-        var csvData = Papa.parse(liveinfo.responseText)['data'];
-        if (csvData != null) {
-            csvData.forEach(function(data){
-                var userId = data[0];
-                var openStr = data[1];
-                var gameName = data[2];
-                var title = data[3];
-
-                if (userId == 'GodJJ' && openStr == 'Open') {
-                    document.getElementById("twitchbadge").innerText = "Live";
-                    document.getElementById("twitchbadge2").innerText = gameName;
-                }
-            });
-        }
-    }
-}
-liveinfo.send();
-
-var newsinfo = new XMLHttpRequest();
-newsinfo.open("GET", "https://docs.google.com/spreadsheets/d/e/2PACX-1vT6GqbrusdF8t250d2AQNCHvwr5VANEIk3-ehToq409u07LRGMUK8ssgkVlqWY4q1cvIUUTAPBWVxq2/pub?gid=1520080953&single=true&output=csv", true);
-newsinfo.onreadystatechange = function() {
-    if (newsinfo.readyState == 4) {
-        var csvData = Papa.parse(newsinfo.responseText)['data'];
-        if (csvData != null) {
-            var dataLength = csvData.length;
-            var news = csvData[dataLength - 1][1];
-            var newslink = csvData[dataLength - 1][2];
-            document.getElementById("news").innerText = news;
-            var Newsmarquee = document.getElementById("newsMarquee");
-            Newsmarquee.start();
-            var Newsbutton = document.getElementById("Newsbutton");
-            Newsbutton.addEventListener('click', function(ce) {
-                chrome.tabs.create({ "url": clearString(newslink) });
-            });
-        }
-    }
-}
-newsinfo.send();
-
-function clearString(s) {
-    var pattern = new RegExp("[`~!@#$^*()|{}';',\\[\\]<>~！@#￥……*（）;|{}【】‘；：”“'。，、？]")
-    var rs = "";
-    for (var i = 0; i < s.length; i++) {
-        rs += s.substr(i, 1).replace(pattern, '');
-    }
-    return rs;
-}
-
-var lastteninfoKR = new XMLHttpRequest();
-lastteninfoKR.open("GET", "https://www.op.gg/api/games/kr/summoners/eOA_tXi69zrauKJNAmY29EaR9pvtljDnS9dhnK5zm8bZ4OM?hl=zh_TW&game_type=TOTAL", true);
-lastteninfoKR.onreadystatechange = function() {
-    var date = [];
-    var winOrlose = [];
-    var kda = [];
-    if (lastteninfoKR.readyState == 4) {
-        var obj = JSON.parse(lastteninfoKR.responseText);
-        var datas = obj.data;
-        for (var i = 0; i < 10; i++) {
-            date[i] = moment.tz(datas[i].created_at, "Asia/Seoul").clone().tz("Asia/Taipei").format('MMMM Do, HH:mm');
-            var temp_data = datas[i].myData
-
-            var heroName = krchampionsMap.get(temp_data.champion_id);
-            var kill = temp_data.stats.kill
-            var assist = temp_data.stats.assist
-            var death = temp_data.stats.death
-            if (death < 1) {
-                kda[i] = kill + assist
-                kda[i] = kda[i].toFixed(2);
-                date[i] = [date[i], "(Perfect KDA) " + heroName];
-            } else {
-                kda[i] = (kill + assist) / death
-                kda[i] = kda[i].toFixed(2);
-                date[i] = [date[i], heroName];
-            }
-
-            var result = temp_data.stats.result
-            if (result == "WIN") {
-                winOrlose.push("Victory");
-            } else if (result == "LOSE") {
-                winOrlose.push("Defeat");
-            } else {
-                winOrlose.push("Remake");
-            }
-        }
-        draw("KR_LOL_Last_10_Games", date.reverse(), winOrlose.reverse(), kda.reverse());
-    }
-}
-
-var krchampionsMap=new Map();
-championsinfoKR = new XMLHttpRequest();
-championsinfoKR.open("GET", "https://www.op.gg/api/meta/champions?hl=zh_TW", true);
-championsinfoKR.onreadystatechange = function() {
-    if (championsinfoKR.readyState == 4) {
-        krchampionsdatatemp = JSON.parse(championsinfoKR.responseText);
-        for(var index in krchampionsdatatemp.data) {
-            krchampionsMap.set(krchampionsdatatemp.data[index].id, krchampionsdatatemp.data[index].name);
-        }
-        lastteninfoKR.send();
-    }
-}
-championsinfoKR.send();
-
-var lastteninfoTW = new XMLHttpRequest();
-lastteninfoTW.open("GET", "https://lol.moa.tw/Ajax/recentgames/104480608", true);
-lastteninfoTW.onreadystatechange = function() {
-    if (lastteninfoTW.readyState == 4) {
-        var obj = lastteninfoTW.responseText;
-        var datetemp = [];
-        var date = [];
-        var winOrlose = [];
-        var kda = [];
-
-        var tempDateparr = obj.split("<div class=\"pull-right\">");
-        for (var i = 1; i < tempDateparr.length; i += 2) {
-            var Taipei = moment.tz(tempDateparr[i].split("</div>")[0].split("</stats>")[1].split("</span>")[0], "YYYY-MM-DD HH:mm:ss", "Asia/Taipei").format('MM/DD, HH:mm');
-            datetemp.push(Taipei);
-        }
-        var tempChampionsparr = obj.split("/lol-info/champions/tile/");
-        for (var i = 1; i < tempChampionsparr.length; i++) {
-            date.push([datetemp[i - 1], clearString(tempChampionsparr[i].split("_")[0])]);
-        }
-
-        var tempGamearr = obj.split("<tr class=\"game-");
-        for (var i = 1; i < tempGamearr.length; i++) {
-            if (tempGamearr[i].split("\">")[0] == "win") {
-                winOrlose.push("Victory");
-            } else if (tempGamearr[i].split("\">")[0] == "lose") {
-                winOrlose.push("Defeat");
-            } else {
-                winOrlose.push("Remake");
-            }
-        }
-
-        var tempkdaarr = obj.split("title=\"K/D/A\">");
-        for (var i = 1; i < tempkdaarr.length; i++) {
-            kda.push(clearString(tempkdaarr[i].split("<br/>(")[1].split(")\n</td>")[0]));
-        }
-        draw("TW_LOL_Last_10_Games", date.reverse(), winOrlose.reverse(), kda.reverse());
-    }
-}
-lastteninfoTW.send();
-
-lastteninfoTW.addEventListener("error", transferFailed, false);
-
-function transferFailed(evt) {
-    var link = document.createElement("a");
-    link.href = "";
-    link.innerText = "由於短期間按太多次 要去戰績網解鎖";
-    link.onclick = function() { chrome.tabs.create({ "url": "https://lol.moa.tw/recaptcha/challenge" }) };
-
-    document.getElementById("last10Games").appendChild(link);
-    document.getElementById("TW_LOL_Last_10_Games").style.visibility = "hidden";
-}
+// 新增清除訊息功能
+document.getElementById("ClearMessageButton").addEventListener("click", function () {
+    chrome.storage.sync.set({ JJMessage: '{"Message":[]}' }, function () {
+        // 清除完成後重新載入頁面更新 UI
+        location.reload();
+    });
+});

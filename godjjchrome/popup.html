@@ -4,12 +4,9 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title></title>
-    <script type="text/javascript" src="js/jquery-3.2.0.min.js"></script>
+    <title>GodJJ Now</title>
+    <script type="text/javascript" src="js/jquery-3.7.1.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/moment.js"></script>
-    <script type="text/javascript" src="js/moment-timezone-with-data.js"></script>
-    <script type="text/javascript" src="js/papaparse.js"></script>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/extension.css">
 </head>
@@ -23,28 +20,22 @@
         </div>
         <div class="row">
             <div class="btn-group btn-group-justified" role="group" aria-label="...">
-                <a id="FBbutton" class="btn btn-default"><img src="/img/f_logo_RGB-Blue_72.png" style="width: 20px;"></a>
-                <a id="Youtubebutton" class="btn btn-default"><img src="/img/youtube_social_icon_red.png" style="width: 20px;"></a>
+                <a id="FBbutton" class="btn btn-default"><img src="/img/f_logo_RGB-Blue_72.png"
+                        style="width: 20px;"></a>
+                <a id="Youtubebutton" class="btn btn-default"><img src="/img/youtube_social_icon_red.png"
+                        style="width: 20px;"></a>
+                <a id="Discordbutton" class="btn btn-default"><img src="/img/discord_icon.webp"
+                        style="width: 20px;"></a>
                 <div class="btn-group">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img src="/img/rank.png" style="width: 20px;"><span class="caret" style="margin-left: 5px;"></span>
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-right">
-                        <li><a id="LoLTWbutton"><b> LOL戰績網(LoL TW) </b></a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a id="LoLbutton"><b> OPGG(LoL KR) </b></a></li>
-                    </ul>
-                </div>
-                <div class="btn-group">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img src="/img/link.png" style="width: 20px;"><span class="caret" style="margin-left: 5px;"></span>
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        <img src="/img/link.png" style="width: 20px;"><span class="caret"
+                            style="margin-left: 5px;"></span>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-right">
                         <li><a id="Musicbutton"><b> JJ舊歌單 </b></a></li>
                         <li role="separator" class="divider"></li>
                         <li><a id="Music2button"><b> JJ新歌單(2017) </b></a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a id="MEJJbutton"><b> ME官網JJ介紹 </b></a></li>
                         <li role="separator" class="divider"></li>
                         <li><a id="JGamersbutton"><b> J群玩家 YT </b></a></li>
                         <li role="separator" class="divider"></li>
@@ -66,126 +57,42 @@
         <div class="row">
             <div class="btn-group btn-group-justified" role="group" aria-label="...">
                 <a id="Newsbutton" class="btn btn-default">
-                    <span id="newsbadge" class="badge" style="background-color: #F9BF45; margin-right: 10px;">JJ News</span>
+                    <span id="newsbadge" class="badge" style="background-color: #F9BF45; margin-right: 10px;">JJ
+                        News</span>
                     <marquee id="newsMarquee" style="margin-bottom: -5px;"><b id="news"></b></marquee>
                 </a>
             </div>
         </div>
         <div class="row">
             <ul class="nav nav-tabs" role="tablist" id="myTabs">
-                <li role="presentation" class="active"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab"><b>Profile</b></a></li>
-                <li role="presentation"><a href="#last10Games" aria-controls="last10Games" role="tab" data-toggle="tab"><b>Last 10 Games</b></a></li>
-                <li role="presentation"><a href="#message" aria-controls="message" role="tab" data-toggle="tab"><b>Message</b></a></li>
+                <li role="presentation" class="active"><a href="#message" aria-controls="message" role="tab"
+                        data-toggle="tab"><b>Message</b></a></li>
             </ul>
             <div class="tab-content">
-                <div role="tabpanel" class="tab-pane fade in active" id="profile">
-                    <table class="table table-striped" style="margin-bottom: 0px;">
-                        <tbody>
-                            <tr>
-                                <th colspan="5" class="history text-center">
-                                    <span class="badge" style="background-color: rgb(0, 162, 255); margin-right: 10px;">KR</span>
-                                    <b id="LoL_Name">讀取中</b>
-                                </th>
-                            </tr>
-                            <tr>
-                                <th class="history text-center">牌位</th>
-                                <th class="history text-center">分數</th>
-                                <th class="history text-center">勝</th>
-                                <th class="history text-center">敗</th>
-                                <th class="history text-center">勝率</th>
-                            </tr>
-                            <tr>
-                                <td id="LoL_tierRank" class="text-center">讀取中</td>
-                                <td id="LoL_LeaguePoints" class="text-center">讀取中</td>
-                                <td id="LoL_Win" class="text-center">讀取中</td>
-                                <td id="LoL_Loss" class="text-center">讀取中</td>
-                                <td id="LoL_WinRatio" class="text-center">讀取中</td>
-                            </tr>
-                            <tr>
-                                <th colspan="5" class="text-center">
-                                    <span class="badge" style="background-color: green; margin-right: 10px;">TW</span>
-                                    <b id="LoL_NameTW">讀取中</b>
-                                </th>
-                            </tr>
-                            <tr>
-                                <th class="history text-center">牌位</th>
-                                <th class="history text-center">分數</th>
-                                <th class="history text-center">勝</th>
-                                <th class="history text-center">敗</th>
-                                <th class="history text-center">勝率</th>
-                            </tr>
-                            <tr>
-                                <td id="LoL_tierRankTW" class="text-center">讀取中</td>
-                                <td id="LoL_LeaguePointsTW" class="text-center">讀取中</td>
-                                <td id="LoL_WinTW" class="text-center">讀取中</td>
-                                <td id="LoL_LossTW" class="text-center">讀取中</td>
-                                <td id="LoL_WinRatioTW" class="text-center">讀取中</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div role="tabpanel" class="tab-pane fade" id="last10Games">
-                    <div style="height: 125px">
-                        <canvas id="KR_LOL_Last_10_Games" style="padding: 0px 5px 5px;"></canvas>
+                <div role="tabpanel" class="tab-pane fade in active" id="message">
+                    <div style="max-height:300px; overflow-y:auto;">
+                        <table class="table table-striped" style="margin-bottom: 0px;">
+                            <thead>
+                                <tr>
+                                    <th class="history text-center" style="width:10px;">#</th>
+                                    <th class="history text-center" style="width:70px;">Time</th>
+                                    <th class="history text-center" style="width:80px;">Channel</th>
+                                    <th class="history text-center" style="width:80px;">Streamer</th>
+                                    <th class="history text-center">Message</th>
+                                </tr>
+                            </thead>
+                            <tbody id="messageTableBody">
+                                <!-- 動態加入訊息列 -->
+                            </tbody>
+                        </table>
                     </div>
-                    <div style="height: 125px">
-                        <canvas id="TW_LOL_Last_10_Games" style="padding: 0px 5px 5px;"></canvas>
-                    </div>
-                </div>
-                <div role="tabpanel" class="tab-pane fade" id="message">
-                    <table class="table table-striped" style="margin-bottom: 0px;"> 
-                        <thead>
-                            <tr>
-                                <th class="history text-center" style="width:10px;">#</th>
-                                <th class="history text-center" style="width:100px;">Time</th>
-                                <th class="history text-center">Message</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="text-center">1</td>
-                                <td id="time1" class="text-center"></td>
-                                <td id="m1" class="text-center"></td>
-                            </tr>
-                            <tr>
-                                <td class="text-center">2</td>
-                                <td id="time2" class="text-center"></td>
-                                <td id="m2" class="text-center"></td>
-                            </tr>
-                            <tr>
-                                <td class="text-center">3</td>
-                                <td id="time3" class="text-center"></td>
-                                <td id="m3" class="text-center"></td>
-                            </tr>
-                            <tr>
-                                <td class="text-center">4</td>
-                                <td id="time4" class="text-center"></td>
-                                <td id="m4" class="text-center"></td>
-                            </tr>
-                            <tr>
-                                <td class="text-center">5</td>
-                                <td id="time5" class="text-center"></td>
-                                <td id="m5" class="text-center"></td>
-                            </tr>
-                            <tr>
-                                <td class="text-center">6</td>
-                                <td id="time6" class="text-center"></td>
-                                <td id="m6" class="text-center"></td>
-                            </tr>
-                            <tr>
-                                <td class="text-center">7</td>
-                                <td id="time7" class="text-center"></td>
-                                <td id="m7" class="text-center"></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <!-- 新增清除訊息的按鈕 -->
+                    <button id="ClearMessageButton" class="btn btn-danger btn-block"
+                        style="margin-top: 10px;">清除訊息</button>
                 </div>
             </div>
         </div>
     </div>
-    <script type="text/javascript" src="js/Chart.js"></script>
-    <script type="text/javascript" src="js/drawrecord.js"></script>
-    <!-- <script type="text/javascript" src="js/konami.js"></script> -->
     <script type="text/javascript" src="popup.js"></script>
 </body>
 

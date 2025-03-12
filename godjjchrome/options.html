@@ -4,29 +4,58 @@
 <head>
     <title>選項</title>
     <style>
-    body{
-        padding: 10px;
-    }
+        body {
+            padding: 10px;
+        }
+
+        .channel-input {
+            margin-bottom: 10px;
+        }
+
+        .channel-list {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            max-height: 200px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            padding: 5px;
+        }
+
+        .channel-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+        }
+
+        .delete-btn {
+            color: red;
+            cursor: pointer;
+        }
     </style>
+    <script type="module" src="options.js"></script>
 </head>
 
 <body>
     <label>
-        <input type="checkbox" id="getChat"> 是否獲取聊天室JJ的留言
+        <input type="checkbox" id="getChatNotification"> 是否開啟聊天室通知
     </label>
     <p></p>
-    <label>
-        <input type="checkbox" id="getOpen" disabled> 是否查詢JJ開台 (2.3.2版移除功能)
-    </label>
-    <p></p>
-    <label>
-        <input type="checkbox" id="getSound" disabled> 是否開啟開台通知音效 (2.3.2版移除功能)
-    </label>
-    <p></p>
-    <label>
-        <input type="checkbox" id="getSoundVersion" disabled> 使用特別版音效 (2.3.2版移除功能)
-    </label>
-    <p></p>
+
+    <h3>實況台管理</h3>
+    <div>
+        <div class="channel-input">
+            <input type="text" id="newChannel" placeholder="輸入要監控的實況台名稱">
+            <button id="addChannel">新增</button>
+            <button id="resetChannels" style="margin-left: 10px;">回復預設實況台</button>
+        </div>
+        <div>
+            <h4>監控中的實況台：</h4>
+            <div id="channelList" class="channel-list">
+                <!-- 這裡會動態填入實況台列表 -->
+            </div>
+        </div>
+    </div>
+
     <div id="status"></div>
     <p></p>
     <button id="save">Save</button>
@@ -35,7 +64,6 @@
     <p></p>
     <a id="githubButton" href=""><b style="color: #3B5998;">Github</b></a>
     <p>有任何問題可私訊Twitch</p>
-    <script src="options.js"></script>
 </body>
 
 </html>

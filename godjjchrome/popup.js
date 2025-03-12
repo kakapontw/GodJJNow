@@ -63,9 +63,12 @@ function fetchLatestYoutubeVideo() {
                 newsMarquee.setAttribute("behavior", "scroll");
 
                 // 啟用按鈕點擊開啟影片
-                const Newsbutton = document.getElementById("Newsbutton");
+                let Newsbutton = document.getElementById("Newsbutton");
                 // 先移除舊的事件監聽器，避免重複綁定，會導致跑馬燈第一次跑到一半就被重置
-                Newsbutton.replaceWith(Newsbutton.cloneNode(true));
+                const newButton = Newsbutton.cloneNode(true);
+                Newsbutton.parentNode.replaceChild(newButton, Newsbutton);
+                // 重新獲取新的按鈕元素
+                Newsbutton = document.getElementById("Newsbutton");
                 Newsbutton.addEventListener("click", function () {
                     chrome.tabs.create({ "url": videoUrl });
                 });

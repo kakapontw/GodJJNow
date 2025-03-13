@@ -116,7 +116,7 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
                     console.error("儲存訊息失敗:", chrome.runtime.lastError);
 
                     // 檢查是否為儲存空間配額超出錯誤
-                    if (chrome.runtime.lastError.message.includes("QUOTA_EXCEEDED")) {
+                    if (chrome.runtime.lastError.message.includes("QUOTA_BYTES_PER_ITEM")) {
                         console.log("儲存空間已滿，刪除舊訊息");
 
                         // 刪除最舊的10則訊息

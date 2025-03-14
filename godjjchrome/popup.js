@@ -156,6 +156,12 @@ chrome.storage.sync.get({
 
             // 點擊切換顯示完整/縮略訊息
             tdMsg.addEventListener("click", function (e) {
+                // 防止文字被選取後觸發點擊事件導致訊息又被折疊
+                const selection = window.getSelection();
+                if (selection.toString().length > 0) {
+                    return;
+                }
+
                 var shortMsg = this.querySelector(".short-message");
                 var fullMsg = this.querySelector(".full-message");
 
@@ -176,9 +182,9 @@ chrome.storage.sync.get({
 
         tr.appendChild(tdIndex);
         tr.appendChild(tdTime);
+        tr.appendChild(tdMsg);
         tr.appendChild(tdChannel);
         tr.appendChild(tdStreamer);
-        tr.appendChild(tdMsg);
         tbody.appendChild(tr);
     }
 

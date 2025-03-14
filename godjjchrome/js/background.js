@@ -89,7 +89,8 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
                 month: "2-digit",
                 day: "2-digit",
                 hour: "2-digit",
-                minute: "2-digit"
+                minute: "2-digit",
+                hour12: false
             }).replace(/\//g, "-");
 
             // 建立包含實況台和主播資訊的訊息物件

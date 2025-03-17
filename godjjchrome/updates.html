@@ -5,18 +5,16 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title></title>
-    <script type="text/javascript" src="js/jquery-3.2.0.min.js"></script>
+    <script type="text/javascript" src="js/jquery-3.7.1.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flat-ui/2.3.0/css/flat-ui.css">
     <style>
-    body {
-        font-family: "微軟雅黑體", "蘋方-繁", "Microsoft JhengHei", "標楷體", DFKai-SB, sans-serif;
-        font-size: 1.8rem;
-        margin-top: 10px;
-        /*color: #ddd;*/
-        /*text-shadow: 0 1px 3px rgba(0,0,0,.5);*/
-    }
+        body {
+            font-family: "微軟雅黑體", "蘋方-繁", "Microsoft JhengHei", "標楷體", DFKai-SB, sans-serif;
+            font-size: 1.8rem;
+            margin-top: 10px;
+        }
     </style>
 </head>
 
@@ -43,9 +41,20 @@
         </div>
         <div class="row">
             <div class="col-md-6">
+                <h4><span class="fui-checkbox-checked"></span> 3.0.0</h4>
+                <p><strong>因應Chrome瀏覽器要把Manifest V2淘汰了，更新Manifest V3架構</strong></p>
+                <p><strong>更新Message頁面，支援多重實況台阿接發言通知</strong></p>
+                <p><strong>設定頁面新增開啟/關閉通知的選項</strong></p>
+                <p><strong>設定頁面新增監控實況台列表的管理功能</strong></p>
+                <p><strong>JJ News跑馬燈改為自動更新GODJJ YT實況台最新影片</strong></p>
+                <p><strong>新增崩康 Discord按鈕，點擊即可加入JJ Discord</strong></p>
+                <p><strong>移除LOL相關功能</strong></p>
+                <p><strong>移除已經死掉的超連結</strong></p>
+                <br>
                 <h4><span class="fui-checkbox-checked"></span> 2.3.2</h4>
                 <p><strong>1. 終止開台通知服務，因 Twitch API v5 將於 2022/02/28 停用</strong></p>
-                <p><strong>2. 由於套件沒有開台通知，更換套件圖示為JJ機器人 <img src="./img/jrobot.png" class="img-rounded" style="width: 28px"></strong></p>
+                <p><strong>2. 由於套件沒有開台通知，更換套件圖示為JJ機器人 <img src="./img/jrobot.png" class="img-rounded"
+                            style="width: 28px"></strong></p>
                 <p><strong>3. 更新opgg api，讓韓服最新十場的數據可以畫出來</strong></p>
                 <br>
                 <p><strong>開台通知先前嘗試的新方法，有人反應很慢才會通知且會亂叫</strong></p>
@@ -105,7 +114,8 @@
                 <hr>
                 <h4><span class="fui-checkbox-unchecked"></span> 1.6.0</h4>
                 <p><strong>Twitch v3 API 即將完全關閉，更新Twitch API(v3->v5)</strong></p>
-                <p><strong>官方說明：</strong><a href="https://dev.twitch.tv/docs/v5/guides/migration/">v3 to v5 Migration Guide</a></p>
+                <p><strong>官方說明：</strong><a href="https://dev.twitch.tv/docs/v5/guides/migration/">v3 to v5 Migration
+                        Guide</a></p>
                 <p><strong>最近開台通知問題推測是這個所導致</strong></p>
                 <p><strong>以後遇到通知失控的問題，可以先把通知從設定中先關掉</strong></p>
                 <hr>
@@ -134,7 +144,8 @@
                 <h4><span class="fui-checkbox-unchecked"></span> 1.5.2</h4>
                 <p><strong>慶祝每日使用人數突破1000人(九個月的時間 3/24~12/29)</strong></p>
                 <p><strong>並迎接2018的到來</strong></p>
-                <p><strong>更新開台通知音效及工作列圖示 (開台：<img src="./img/8.png" class="img-rounded" style="width: 28px">  關台：<img src="./img/sleep.png" class="img-rounded" style="width: 28px">)</strong></p>
+                <p><strong>更新開台通知音效及工作列圖示 (開台：<img src="./img/8.png" class="img-rounded" style="width: 28px"> 關台：<img
+                            src="./img/sleep.png" class="img-rounded" style="width: 28px">)</strong></p>
                 <hr>
                 <h4><span class="fui-checkbox-unchecked"></span> 1.5.1</h4>
                 <p><strong>增加台服資訊</strong></p>
@@ -197,13 +208,13 @@
             </div>
             <div class="col-md-6">
                 <h4><span class="fui-eye"></span> 功能介紹</h4>
-                <p><span class="fui-arrow-right"></span><strong>  一鍵獲得眾多資訊</strong></p>
+                <p><span class="fui-arrow-right"></span><strong> 一鍵獲得眾多資訊</strong></p>
                 <img style="height: 300px" src="/img/main.png" alt="">
                 <hr>
-                <p><span class="fui-arrow-right"></span><strong>  套件偵測到聊天室JJ有發言會進行通知</strong></p>
+                <p><span class="fui-arrow-right"></span><strong> 套件偵測到聊天室JJ有發言會進行通知</strong></p>
                 <img style="height: 300px" src="/img/open2.png" alt="">
                 <hr>
-                <p><span class="fui-arrow-right"></span><strong>  最後有提供關閉功能的選項</strong></p>
+                <p><span class="fui-arrow-right"></span><strong> 最後有提供關閉功能的選項</strong></p>
                 <img style="height: 300px" src="/img/option.png" alt="">
                 <hr>
             </div>

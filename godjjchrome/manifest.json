@@ -1,39 +1,39 @@
 {
-    "manifest_version": 2,
+    "manifest_version": 3,
     "name": "GodJJ Now",
     "description": "是一款真正的JJ套件",
-    "version": "2.3.2",
+    "version": "3.0.0",
     "permissions": [
-        "alarms",
-        "storage",
-        "notifications",
-        "webNavigation",
-        "*://*.twitch.tv/*",
-        "*://*.op.gg/",
-        "https://lol.moa.tw/",
-        "https://docs.google.com/*"
+      "alarms",
+      "storage",
+      "notifications",
+      "webNavigation",
+      "tabs",
+      "offscreen"
+    ],
+    "host_permissions": [
+      "*://*.twitch.tv/*"
     ],
     "options_ui":
     {
-        "page": "options.html",
-        "chrome_style": true
+        "page": "options.html"
     },
     "content_scripts": [
         {
           "matches": ["*://*.twitch.tv/*"],
-          "js": ["/js/arrive.js", "/js/points-clicker.js"],
+          "js": ["js/arrive.js", "js/points-clicker.js"],
           "run_at" : "document_idle"
         }
     ],
     "background":
     {
-        "page": "background.html",
-        "persistent": true
+        "service_worker": "js/background.js",
+        "type": "module"
     },
-    "browser_action":
+    "action":
     {
         "default_title": "點我查詢GodJJ",
-        "default_icon": "/img/jrobot.png",
+        "default_icon": "img/jrobot.png",
         "default_popup": "popup.html"
     },
     "icons":

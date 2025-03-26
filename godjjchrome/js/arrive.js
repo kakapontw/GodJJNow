@@ -4,11 +4,11 @@
 
 /*
  * arrive.js
- * v2.4.1
+ * v2.5.2
  * https://github.com/uzairfarooq/arrive
  * MIT licensed
  *
- * Copyright (c) 2014-2017 Uzair Farooq
+ * Copyright (c) 2014-2024 Uzair Farooq
  */
 var Arrive = (function(window, $, undefined) {
 
@@ -40,10 +40,16 @@ var Arrive = (function(window, $, undefined) {
           }
         };
       },
-      callCallbacks: function(callbacksToBeCalled, registrationData) {
-        if (registrationData && registrationData.options.onceOnly && registrationData.firedElems.length == 1) {
+      callCallbacks: function(callbacksToBeCalled, registrationData, mutationEvents) {
+        if (!callbacksToBeCalled.length) return;
+
+        if (registrationData && registrationData.options.onceOnly) {
           // as onlyOnce param is true, make sure we fire the event for only one item
           callbacksToBeCalled = [callbacksToBeCalled[0]];
+
+          // unbind event after first callback as onceOnly is true.
+          registrationData.me.unbindEventWithSelectorAndCallback.call(
+            registrationData.target, registrationData.selector, registrationData.callback);
         }
 
         for (var i = 0, cb; (cb = callbacksToBeCalled[i]); i++) {
@@ -52,10 +58,8 @@ var Arrive = (function(window, $, undefined) {
           }
         }
 
-        if (registrationData && registrationData.options.onceOnly && registrationData.firedElems.length == 1) {
-          // unbind event after first callback as onceOnly is true.
-          registrationData.me.unbindEventWithSelectorAndCallback.call(
-            registrationData.target, registrationData.selector, registrationData.callback);
+        if (registrationData && registrationData.callback && mutationEvents) {
+          mutationEvents.addTimeoutHandler(registrationData.target, registrationData.selector, registrationData.callback, registrationData.options, registrationData.data);
         }
       },
       // traverse through all descendants of a node to check if event should be fired for any descendant
@@ -111,12 +115,13 @@ var Arrive = (function(window, $, undefined) {
       this._beforeRemoving  = null;
     };
 
-    EventsBucket.prototype.addEvent = function(target, selector, options, callback) {
+    EventsBucket.prototype.addEvent = function(target, selector, options, callback, data) {
       var newEvent = {
         target:             target,
         selector:           selector,
         options:            options,
         callback:           callback,
+        data:               data,
         firedElems:         []
       };
 
@@ -133,6 +138,10 @@ var Arrive = (function(window, $, undefined) {
         if (compareFunction(registeredEvent)) {
           if (this._beforeRemoving) {
               this._beforeRemoving(registeredEvent);
+          }
+
+          if (registeredEvent.data && registeredEvent.data.timeoutId) {
+            clearTimeout(registeredEvent.data.timeoutId);
           }
 
           // mark callback as null so that even if an event mutation was already triggered it does not call callback
@@ -203,7 +212,12 @@ var Arrive = (function(window, $, undefined) {
       var elements = utils.toElementsArray(this);
 
       for (var i = 0; i < elements.length; i++) {
-        eventsBucket.addEvent(elements[i], selector, options, callback);
+        const data = {};
+
+      // Add timeout handling
+        me.addTimeoutHandler(elements[i], selector, callback, options, data);
+
+        eventsBucket.addEvent(elements[i], selector, options, callback, data);
       }
     };
 
@@ -259,6 +273,21 @@ var Arrive = (function(window, $, undefined) {
       });
     };
 
+    this.addTimeoutHandler = function(target, selector, callback, options, data) {
+      if (!options.timeout || options.timeout <= 0) {
+        return;
+      }
+    
+      if (data.timeoutId) {
+        clearTimeout(data.timeoutId);
+      }
+    
+      data.timeoutId = setTimeout(() => {
+        me.unbindEventWithSelectorAndCallback.call(target, selector, callback);
+        callback.call(null, null);
+      }, options.timeout);
+    }
+
     return this;
   };
 
@@ -272,7 +301,8 @@ var Arrive = (function(window, $, undefined) {
     var arriveDefaultOptions = {
       fireOnAttributesModification: false,
       onceOnly: false,
-      existing: false
+      existing: false,
+      timeout: 0  // default 0 (no timeout)
     };
 
     function getArriveObserverConfig(options) {
@@ -306,7 +336,7 @@ var Arrive = (function(window, $, undefined) {
           }
         }
 
-        utils.callCallbacks(callbacksToBeCalled, registrationData);
+        utils.callCallbacks(callbacksToBeCalled, registrationData, arriveEvents);
       });
     }
 
@@ -332,17 +362,16 @@ var Arrive = (function(window, $, undefined) {
     var mutationBindEvent = arriveEvents.bindEvent;
 
     // override bindEvent function
-    arriveEvents.bindEvent = function(selector, options, callback) {
+    arriveEvents.bindEvent = function(selector, arg2, arg3) {
 
-      if (typeof callback === "undefined") {
-        callback = options;
-        options = arriveDefaultOptions;
-      } else {
-        options = utils.mergeArrays(arriveDefaultOptions, options);
-      }
-
+      var options = (typeof arg2 === 'object') ? utils.mergeArrays(arriveDefaultOptions, arg2) : { ...arriveDefaultOptions };
+      var callback = (typeof arg3 === 'function') ? arg3 : (typeof arg2 === 'function') ? arg2 : undefined;
       var elements = utils.toElementsArray(this);
 
+      // For promise and async support, we can only do onceOnly=true
+      if (!callback)
+        options.onceOnly = true;
+      
       if (options.existing) {
         var existing = [];
 
@@ -355,13 +384,22 @@ var Arrive = (function(window, $, undefined) {
 
         // no need to bind event if the callback has to be fired only once and we have already found the element
         if (options.onceOnly && existing.length) {
-          return callback.call(existing[0].elem, existing[0].elem);
+          if (callback) {
+            return callback.call(existing[0].elem, existing[0].elem);
+          } else {
+            return Promise.resolve(existing[0].elem);
+          }
         }
 
         setTimeout(utils.callCallbacks, 1, existing);
       }
 
-      mutationBindEvent.call(this, selector, options, callback);
+      if (callback) {
+        mutationBindEvent.call(this, selector, options, callback);
+      } else {
+        var a = this;
+        return new Promise(resolve => mutationBindEvent.call(a, selector, options, resolve));
+      }
     };
 
     return arriveEvents;
@@ -374,7 +412,10 @@ var Arrive = (function(window, $, undefined) {
    */
   var LeaveEvents = function() {
     // Default options for 'leave' event
-    var leaveDefaultOptions = {};
+    var leaveDefaultOptions = {
+      onceOnly: false,
+      timeout: 0,  // default 0 (no timeout)
+    };
 
     function getLeaveObserverConfig() {
       var config = {
@@ -394,7 +435,7 @@ var Arrive = (function(window, $, undefined) {
           utils.checkChildNodesRecursively(removedNodes, registrationData, nodeMatchFunc, callbacksToBeCalled);
         }
 
-        utils.callCallbacks(callbacksToBeCalled, registrationData);
+        utils.callCallbacks(callbacksToBeCalled, registrationData, leaveEvents);
       });
     }
 
@@ -407,20 +448,25 @@ var Arrive = (function(window, $, undefined) {
     var mutationBindEvent = leaveEvents.bindEvent;
 
     // override bindEvent function
-    leaveEvents.bindEvent = function(selector, options, callback) {
+    leaveEvents.bindEvent = function(selector, arg2, arg3) {
 
-      if (typeof callback === "undefined") {
-        callback = options;
-        options = leaveDefaultOptions;
+      var options = (typeof arg2 === 'object') ? utils.mergeArrays(leaveDefaultOptions, arg2) : { ...leaveDefaultOptions };
+      var callback = (typeof arg3 === 'function') ? arg3 : (typeof arg2 === 'function') ? arg2 : undefined;
+
+      if (callback) {
+        mutationBindEvent.call(this, selector, options, callback);
       } else {
-        options = utils.mergeArrays(leaveDefaultOptions, options);
-      }
+        // For promise and async support, we can only do onceOnly=true
+        options.onceOnly = true;
 
-      mutationBindEvent.call(this, selector, options, callback);
+        var a = this;
+        return new Promise(resolve => mutationBindEvent.call(a, selector, options, resolve));
+      }
     };
 
     return leaveEvents;
   };
+
 
 
   var arriveEvents = new ArriveEvents(),

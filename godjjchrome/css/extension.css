@@ -3,7 +3,6 @@ body {
     margin: 0;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif, "微軟正黑體", "微软雅黑", "メイリオ", "맑은 고딕";
     font-size: 12px;
-    /*line-height: 14px;*/
     color: #333333;
     background-color: #ffffff;
 }
@@ -37,4 +36,29 @@ td {
 
 .dropdown-menu .divider {
     margin: 5px 0px;
+}
+
+.message-cell {
+    cursor: pointer;
+    position: relative;
+}
+
+.message-cell:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.short-message, .full-message {
+    word-wrap: break-word;
+    max-width: 100%;
+    user-select: text;
+    -webkit-user-select: text;
+}
+
+.full-message {
+    display: none;
+}
+
+.popover {
+    max-width: 300px;
+    word-wrap: break-word;
 }

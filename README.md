@@ -40,6 +40,9 @@
 * Notification icon made by Darius Dan from www.flaticon.com, licensed under CC BY 3.0
 
 ### 更新資訊：
+<h4>2.3.3</h4>
+<p><strong>1. 回歸原廠, 台韓服都使用opgg</strong></p>
+<br>
 <h4>2.3.2</h4>
 <p><strong>1. 終止開台通知服務，因 Twitch API v5 將於 2022/02/28 停用</strong></p>
 <p><strong>2. 由於套件沒有開台通知，更換套件圖示為JJ機器人</strong></p>

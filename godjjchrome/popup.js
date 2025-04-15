@@ -100,7 +100,27 @@ chrome.storage.sync.get({
         // 建立編號欄
         var tdIndex = document.createElement("td");
         tdIndex.className = "text-center";
-        tdIndex.innerText = (i + 1);
+
+        // 添加編號和複製按鈕
+        var indexSpan = document.createElement("span");
+        indexSpan.innerText = (i + 1);
+
+        var copyIcon = document.createElement("img");
+        copyIcon.src = "/img/copy_icon.png"; // 假設已有或將添加此圖標
+        copyIcon.style.width = "15px";
+        copyIcon.style.marginLeft = "3px";
+        copyIcon.style.cursor = "pointer";
+        copyIcon.title = "複製此則訊息";
+        copyIcon.className = "copy-btn";
+
+        // 儲存訊息相關資料用於複製
+        copyIcon.dataset.channel = value.channel;
+        copyIcon.dataset.time = key;
+        copyIcon.dataset.streamer = value.streamer;
+        copyIcon.dataset.message = value.message;
+
+        tdIndex.appendChild(indexSpan);
+        tdIndex.appendChild(copyIcon);
 
         // 建立時間欄
         var tdTime = document.createElement("td");
@@ -138,6 +158,11 @@ chrome.storage.sync.get({
 
     //Message彈出
     $("[data-toggle='popover']").popover();
+
+    // 添加複製按鈕的點擊事件
+    document.querySelectorAll('.copy-btn').forEach(function (btn) {
+        btn.addEventListener('click', copyMessage);
+    });
 });
 
 /**
@@ -232,6 +257,35 @@ function handleUrlClick(e) {
         chrome.tabs.create({ "url": e.target.href });
         e.stopPropagation();
     }
+}
+
+/**
+ * 複製訊息到剪貼板
+ */
+function copyMessage(e) {
+    e.stopPropagation(); // 防止事件冒泡
+
+    const channel = this.dataset.channel;
+    const time = this.dataset.time;
+    const streamer = this.dataset.streamer;
+    const message = this.dataset.message;
+
+    // 組合訊息格式
+    const copyText = `${channel} ${time} ${streamer}: ${message}`;
+
+    // 複製到剪貼簿
+    navigator.clipboard.writeText(copyText).then(function () {
+        // 顯示複製成功提示
+        const copyAlert = document.getElementById('copyAlert');
+        copyAlert.style.display = 'block';
+
+        // 2秒後隱藏提示
+        setTimeout(function () {
+            copyAlert.style.display = 'none';
+        }, 2000);
+    }, function (err) {
+        console.error('無法複製文本: ', err);
+    });
 }
 
 // 新增全域點擊事件來關閉已展開的訊息

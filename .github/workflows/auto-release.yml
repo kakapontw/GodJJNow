@@ -1,0 +1,41 @@
+name: Auto Release
+
+on:
+  push:
+    tags:
+      - 'v*' # 當推送的 tag 格式為 v1.0.0 等形式時觸發
+
+jobs:
+  build:
+    name: Create Release
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      
+      - name: Get tag name
+        id: get_tag
+        run: echo "TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+      
+      - name: Get Changelog Entry
+        id: changelog_reader
+        uses: mindsers/changelog-reader-action@v2
+        with:
+          version: ${{ steps.get_tag.outputs.TAG }}
+          path: ./CHANGELOG.md
+        continue-on-error: true
+      
+      - name: Create Release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ steps.get_tag.outputs.TAG }}
+          name: Release ${{ steps.get_tag.outputs.TAG }}
+          body: ${{ steps.changelog_reader.outputs.changes || format('Release of version {0}', steps.get_tag.outputs.TAG) }}
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

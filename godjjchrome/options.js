@@ -1,11 +1,10 @@
-﻿// 引入共用配置
-import { DEFAULT_CHANNELS, PROTECTED_CHANNEL } from './js/config.js';
+﻿import { DEFAULT_CHANNELS, PROTECTED_CHANNEL } from './js/config.js';
 
 document.getElementById("updateButton").addEventListener("click", function () {
     chrome.tabs.create({ "url": "updates.html" });
 });
 document.getElementById("githubButton").addEventListener("click", function () {
-    chrome.tabs.create({ "url": "https://github.com/kakapontw/GodJJNow" });
+    chrome.tabs.create({ "url": "https://github.com/MayGrass/JJner" });
 });
 
 // 實況台相關函數

@@ -6,6 +6,7 @@
     buttonMap.set("Musicbutton", "https://www.youtube.com/playlist?list=PLicQ4e8xsEiH3AnRUFkkwJVaHHvLi-ylL");
     buttonMap.set("Music2button", "https://www.youtube.com/playlist?list=PLBGxXkqJe9DSoclWSk6idRDyTYtmWxlcw");
     buttonMap.set("JGamersbutton", "https://www.youtube.com/channel/UCNAmbRgIsM8xKDJR47sLYAw");
+    buttonMap.set("VODJJbutton", "https://www.youtube.com/channel/UCZa7O3mT8gmKRUg_6ir1-yw");
     buttonMap.set("Godjjmebutton", "https://godjj.me");
     buttonMap.set("Twitchbutton", "https://www.twitch.tv/godjj");
     buttonMap.forEach((buttonUrl, buttonName) => {
@@ -123,62 +124,9 @@ chrome.storage.sync.get({
         // 建立訊息欄
         var tdMsg = document.createElement("td");
         tdMsg.className = "text-center message-cell";
-        if (messageContent.indexOf("https://") > -1 || messageContent.indexOf("http://") > -1) {
-            var link = document.createElement("a");
-            link.href = messageContent;
-            link.innerText = messageContent.substring(0, 30) + " ...";
-            link.onclick = function (e) {
-                e.preventDefault();
-                chrome.tabs.create({ "url": this.href });
-            };
-            tdMsg.appendChild(link);
-        } else if (messageContent.length > 12) {
-            // 創建一個用於顯示縮略訊息的元素
-            var shortMsg = document.createElement("span");
-            shortMsg.className = "short-message";
-            shortMsg.innerText = messageContent.substring(0, 12) + " ...";
 
-            // 創建一個用於顯示完整訊息的元素（初始隱藏）
-            var fullMsg = document.createElement("span");
-            fullMsg.className = "full-message";
-            fullMsg.innerText = messageContent;
-            fullMsg.style.display = "none";
-
-            tdMsg.appendChild(shortMsg);
-            tdMsg.appendChild(fullMsg);
-
-            // 同時設置 popover 用於滑鼠 hover 顯示
-            tdMsg.setAttribute("data-container", "body");
-            tdMsg.setAttribute("data-toggle", "popover");
-            tdMsg.setAttribute("data-placement", "top");
-            tdMsg.setAttribute("data-trigger", "hover");
-            tdMsg.setAttribute("data-content", messageContent);
-
-            // 點擊切換顯示完整/縮略訊息
-            tdMsg.addEventListener("click", function (e) {
-                // 防止文字被選取後觸發點擊事件導致訊息又被折疊
-                const selection = window.getSelection();
-                if (selection.toString().length > 0) {
-                    return;
-                }
-
-                var shortMsg = this.querySelector(".short-message");
-                var fullMsg = this.querySelector(".full-message");
-
-                if (fullMsg.style.display === "none") {
-                    shortMsg.style.display = "none";
-                    fullMsg.style.display = "inline";
-                } else {
-                    shortMsg.style.display = "inline";
-                    fullMsg.style.display = "none";
-                }
-
-                // 防止事件冒泡
-                e.stopPropagation();
-            });
-        } else {
-            tdMsg.innerText = messageContent;
-        }
+        // 統一處理訊息顯示邏輯
+        processMessageCell(tdMsg, messageContent);
 
         tr.appendChild(tdIndex);
         tr.appendChild(tdTime);
@@ -191,6 +139,100 @@ chrome.storage.sync.get({
     //Message彈出
     $("[data-toggle='popover']").popover();
 });
+
+/**
+ * 處理訊息單元格的顯示邏輯
+ * @param {HTMLElement} cell - 訊息單元格元素
+ * @param {string} content - 訊息內容
+ */
+function processMessageCell(cell, content) {
+    // 檢查訊息是否包含URL
+    const urlRegex = /(https?:\/\/[^\s]+)/g;
+    const containsUrl = urlRegex.test(content);
+    const needsExpansion = content.length > 12;
+
+    // 如果訊息需要展開機制（長訊息或包含URL）
+    if (needsExpansion || containsUrl) {
+        // 創建縮略訊息元素
+        var shortMsg = document.createElement("span");
+        shortMsg.className = "short-message";
+        shortMsg.innerText = content.substring(0, 12) + " ...";
+
+        // 創建完整訊息元素
+        var fullMsg = document.createElement("span");
+        fullMsg.className = "full-message";
+        fullMsg.style.display = "none";
+
+        // 如果包含URL，將URL轉換為可點擊連結
+        if (containsUrl) {
+            const formattedMessage = content.replace(urlRegex, function (url) {
+                return `<a href="${url}" class="message-link">${url}</a>`;
+            });
+            fullMsg.innerHTML = formattedMessage;
+        } else {
+            fullMsg.innerText = content;
+        }
+
+        cell.appendChild(shortMsg);
+        cell.appendChild(fullMsg);
+
+        // 設置 popover 用於滑鼠 hover 顯示
+        cell.setAttribute("data-container", "body");
+        cell.setAttribute("data-toggle", "popover");
+        cell.setAttribute("data-placement", "top");
+        cell.setAttribute("data-trigger", "hover");
+        cell.setAttribute("data-content", content);
+
+        // 點擊切換顯示完整/縮略訊息
+        cell.addEventListener("click", toggleMessageDisplay);
+
+        // 如果包含URL，添加URL點擊事件
+        if (containsUrl) {
+            cell.addEventListener("click", handleUrlClick);
+        }
+    } else {
+        // 短訊息直接顯示
+        cell.innerText = content;
+    }
+}
+
+/**
+ * 切換訊息展開/縮合顯示狀態
+ */
+function toggleMessageDisplay(e) {
+    // 防止文字被選取後觸發點擊事件導致訊息又被折疊
+    const selection = window.getSelection();
+    if (selection.toString().length > 0) {
+        return;
+    }
+
+    var shortMsg = this.querySelector(".short-message");
+    var fullMsg = this.querySelector(".full-message");
+
+    if (shortMsg && fullMsg) {
+        if (fullMsg.style.display === "none") {
+            shortMsg.style.display = "none";
+            fullMsg.style.display = "inline";
+        } else {
+            shortMsg.style.display = "inline";
+            fullMsg.style.display = "none";
+        }
+    }
+
+    // 防止事件冒泡
+    e.stopPropagation();
+}
+
+/**
+ * 處理URL點擊事件
+ */
+function handleUrlClick(e) {
+    if (e.target.classList.contains('message-link')) {
+        e.preventDefault();
+        chrome.tabs.create({ "url": e.target.href });
+        e.stopPropagation();
+    }
+}
 
 // 新增全域點擊事件來關閉已展開的訊息
 $(document).on("click", function (e) {

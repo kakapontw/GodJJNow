@@ -1,5 +1,5 @@
 body {
-    width: 350px;
+    width: 400px;
     margin: 0;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif, "微軟正黑體", "微软雅黑", "メイリオ", "맑은 고딕";
     font-size: 12px;
@@ -31,7 +31,7 @@ td {
 }
 
 .dropdown-menu li a {
-    font-size: 10px;
+    font-size: 12px;
 }
 
 .dropdown-menu .divider {
